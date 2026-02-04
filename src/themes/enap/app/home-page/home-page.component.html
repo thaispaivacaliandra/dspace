@@ -1,5 +1,6 @@
 <ds-home-coar></ds-home-coar>
 <ds-home-news></ds-home-news>
+<ds-enap-stats-section></ds-enap-stats-section>
 @if (showDiscoverFilters) {
   <ds-configuration-search-page
     [sideBarWidth]="3"
@@ -11,16 +12,12 @@
   </ds-configuration-search-page>
 }
 @if (!showDiscoverFilters) {
-  <div class="container">
-    <ng-container *ngTemplateOutlet="homeContent"></ng-container>
-  </div>
+  <ng-container *ngTemplateOutlet="homeContent"></ng-container>
 }
+<ds-enap-explore-themes></ds-enap-explore-themes>
 <ds-suggestions-popup></ds-suggestions-popup>
 
 <ng-template #homeContent>
-  <ds-search-form [inPlaceSearch]="false"
-    [searchPlaceholder]="'home.search-form.placeholder' | translate">
-  </ds-search-form>
   <ds-top-level-community-list></ds-top-level-community-list>
   @if (recentSubmissionspageSize>0) {
     <ds-enap-recent-item-list></ds-enap-recent-item-list>

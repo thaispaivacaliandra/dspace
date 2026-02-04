@@ -21,3 +21,35 @@
     font-size: 1.1rem
   }
 }
+
+// ENAP utility classes
+.enap-section {
+  max-width: 1142px;
+  margin: 0 auto;
+  padding: var(--enap-section-padding, 80px) 15px;
+
+  @media (max-width: 768px) {
+    padding: var(--enap-section-padding-mobile, 60px) 15px;
+  }
+}
+
+.enap-section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--enap-primary, #024248);
+  margin-bottom: 2.5rem;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.glass-panel {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(2, 66, 72, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+}

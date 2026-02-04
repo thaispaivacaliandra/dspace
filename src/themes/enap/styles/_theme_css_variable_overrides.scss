@@ -11,7 +11,7 @@
     --ds-header-height: 90px;
   }
 
-  --ds-banner-text-background: rgba(0, 0, 0, 0.58);
+  --ds-banner-text-background: rgba(2, 66, 72, 0.3);
   --ds-banner-background-gradient-width: 300px;
 
   --ds-header-navbar-border-bottom-height: 5px;
@@ -25,5 +25,18 @@
 
   --ds-item-page-img-field-default-inline-height: 24px;
   --ds-item-page-img-field-ror-inline-height: var(--ds-item-page-img-field-default-inline-height);
-}
 
+  // ENAP custom variables
+  --enap-primary: #024248;
+  --enap-dark: #012124;
+  --enap-accent: #007D7A;
+  --enap-coral: #E8654A;
+  --enap-bg-light: #f8fafa;
+  --enap-card-radius: 16px;
+  --enap-btn-radius: 40px;
+  --enap-section-padding: 80px;
+  --enap-section-padding-mobile: 60px;
+  --enap-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --enap-shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.14);
+  --enap-transition: 0.3s ease;
+}

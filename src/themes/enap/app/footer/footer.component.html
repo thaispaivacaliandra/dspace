@@ -1,0 +1,91 @@
+<footer class="enap-footer">
+  <div class="footer-main">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <!-- Column 1: About -->
+        <div class="footer-col">
+          <h3 class="footer-heading">Repositório ENAP</h3>
+          <p class="footer-text">
+            Biblioteca Digital da Escola Nacional de Administração Pública.
+            Acervo de publicações, pesquisas e materiais sobre gestão pública e políticas públicas.
+          </p>
+        </div>
+
+        <!-- Column 2: Links -->
+        <div class="footer-col">
+          <h3 class="footer-heading">Links</h3>
+          <ul class="footer-links">
+            <li><a href="https://www.enap.gov.br/" target="_blank" rel="noopener">A Escola</a></li>
+            <li><a href="https://www.enap.gov.br/pt/cursos" target="_blank" rel="noopener">Cursos</a></li>
+            <li><a href="https://www.enap.gov.br/pt/servicos/biblioteca-graciliano-ramos" target="_blank" rel="noopener">Biblioteca Graciliano Ramos</a></li>
+            <li><a href="https://www.enap.gov.br/pt/acontece/central-de-conteudo" target="_blank" rel="noopener">Central de Conteúdo</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Contact -->
+        <div class="footer-col">
+          <h3 class="footer-heading">Contato</h3>
+          <ul class="footer-contact">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              SAIS Área 2-A, Brasília/DF<br>CEP 70.610-900
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              08h às 18h
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:biblioteca@enap.gov.br">biblioteca&#64;enap.gov.br</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Social -->
+        <div class="footer-col">
+          <h3 class="footer-heading">Redes Sociais</h3>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/eaboraenap/" target="_blank" rel="noopener" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/enaboraenap/" target="_blank" rel="noopener" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/enaboraenap" target="_blank" rel="noopener" aria-label="X/Twitter">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/school/enaboraenap/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.youtube.com/enaboraenap" target="_blank" rel="noopener" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-container">
+      <p>
+        <a href="https://www.dspace.org/" target="_blank" rel="noopener">{{ 'footer.link.dspace' | translate }}</a>
+        {{ 'footer.copyright' | translate:{year: dateObj | date:'y'} }}
+        <a href="https://www.lyrasis.org/" target="_blank" rel="noopener">{{ 'footer.link.lyrasis' | translate }}</a>
+      </p>
+      <ul class="footer-bottom-links">
+        @if (showPrivacyPolicy) {
+          <li><a routerLink="info/privacy">{{ 'footer.link.privacy-policy' | translate }}</a></li>
+        }
+        @if (showEndUserAgreement) {
+          <li><a routerLink="info/end-user-agreement">{{ 'footer.link.end-user-agreement' | translate }}</a></li>
+        }
+        <li><a routerLink="info/accessibility">{{ 'footer.link.accessibility' | translate }}</a></li>
+        @if (showSendFeedback$ | async) {
+          <li><a routerLink="info/feedback">{{ 'footer.link.feedback' | translate }}</a></li>
+        }
+      </ul>
+    </div>
+  </div>
+</footer>

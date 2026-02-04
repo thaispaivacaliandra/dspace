@@ -1,69 +1,73 @@
 <ng-container *ngVar="(itemRD$ | async) as itemRD">
   @if (itemRD?.hasSucceeded && itemRD?.payload?.page.length > 0) {
-    <section class="news-section">
-      <div class="news-header">
-        <h2 class="h2-title">{{ 'home.recent-submissions.head' | translate }}</h2>
-      </div>
+    <section class="news-section enap-section">
+      <h2 class="enap-section-title">{{ 'home.recent-submissions.head' | translate }}</h2>
 
-      <!-- Desktop: Grid Layout -->
-      <div class="news-grid-container desktop-only">
-        <!-- Main featured item -->
-        <div class="news-grid-main">
-          <a [routerLink]="[getItemRoute(itemRD.payload.page[0])]"
-             class="news-main-link"
-             [title]="itemRD.payload.page[0].name">
-            <div class="news-main-image">
-              <ds-thumbnail
-                [thumbnail]="itemRD.payload.page[0]?.thumbnail | async"
-                [limitWidth]="false">
-              </ds-thumbnail>
-              <div class="news-main-overlay">
-                <h3 class="news-main-title">{{ itemRD.payload.page[0].name }}</h3>
-                @if (itemRD.payload.page[0].firstMetadataValue('dc.description.abstract'); as abstract) {
-                  <p class="news-main-text">{{ abstract }}</p>
-                }
-                @if (itemRD.payload.page[0].firstMetadataValue('dc.date.issued'); as dateIssued) {
-                  <div class="news-main-date">
-                    <i class="fas fa-calendar"></i>
-                    {{ dateIssued }}
-                  </div>
-                }
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <!-- Secondary items -->
-        @if (itemRD.payload.page.length > 1) {
-          <div class="news-grid-secondary">
-            @for (item of getSecondaryItems(itemRD.payload.page); track item) {
-              <div class="news-secondary-item">
-                <div class="news-secondary-image">
-                  <a [routerLink]="[getItemRoute(item)]" tabindex="-1" [title]="item.name">
-                    <ds-thumbnail
-                      [thumbnail]="item?.thumbnail | async"
-                      [limitWidth]="false">
-                    </ds-thumbnail>
-                  </a>
+      <!-- Desktop: Magazine Layout (1 featured + 3 grid) -->
+      <div class="magazine-layout desktop-only">
+        <!-- Featured item -->
+        <a class="magazine-featured" [routerLink]="[getItemRoute(itemRD.payload.page[0])]"
+           [title]="itemRD.payload.page[0].name">
+          <div class="magazine-featured-image">
+            <ds-thumbnail
+              [thumbnail]="itemRD.payload.page[0]?.thumbnail | async"
+              [limitWidth]="false">
+            </ds-thumbnail>
+            <div class="magazine-featured-overlay">
+              @if (getItemType(itemRD.payload.page[0]); as itemType) {
+                <span class="item-badge" [style.background]="getBadgeColor(itemType)">
+                  {{ itemType }}
+                </span>
+              }
+              <h3 class="magazine-featured-title">{{ itemRD.payload.page[0].name }}</h3>
+              @if (getItemAuthor(itemRD.payload.page[0]); as author) {
+                <p class="magazine-featured-author">
+                  <i class="fas fa-user"></i> {{ author }}
+                </p>
+              }
+              @if (itemRD.payload.page[0].firstMetadataValue('dc.description.abstract'); as abstract) {
+                <p class="magazine-featured-text">{{ abstract }}</p>
+              }
+              @if (itemRD.payload.page[0].firstMetadataValue('dc.date.issued'); as dateIssued) {
+                <div class="magazine-featured-date">
+                  <i class="fas fa-calendar"></i> {{ dateIssued }}
                 </div>
-                <a [routerLink]="[getItemRoute(item)]" class="news-secondary-link">
-                  <div class="news-secondary-content">
-                    <h4 class="news-secondary-title">{{ item.name }}</h4>
-                    @if (item.firstMetadataValue('dc.description.abstract'); as abstract) {
-                      <p class="news-secondary-text">{{ abstract }}</p>
-                    }
-                    @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
-                      <div class="news-secondary-date">
-                        <i class="fas fa-calendar"></i>
-                        {{ dateIssued }}
-                      </div>
-                    }
-                  </div>
-                </a>
-              </div>
-            }
+              }
+            </div>
           </div>
-        }
+        </a>
+
+        <!-- Secondary grid (3 items) -->
+        <div class="magazine-grid">
+          @for (item of getSecondaryItems(itemRD.payload.page); track item) {
+            <a class="magazine-card" [routerLink]="[getItemRoute(item)]" [title]="item.name">
+              <div class="magazine-card-image">
+                <ds-thumbnail
+                  [thumbnail]="item?.thumbnail | async"
+                  [limitWidth]="false">
+                </ds-thumbnail>
+              </div>
+              <div class="magazine-card-content">
+                @if (getItemType(item); as itemType) {
+                  <span class="item-badge item-badge-sm" [style.background]="getBadgeColor(itemType)">
+                    {{ itemType }}
+                  </span>
+                }
+                <h4 class="magazine-card-title">{{ item.name }}</h4>
+                @if (getItemAuthor(item); as author) {
+                  <p class="magazine-card-author">
+                    <i class="fas fa-user"></i> {{ author }}
+                  </p>
+                }
+                @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
+                  <div class="magazine-card-date">
+                    <i class="fas fa-calendar"></i> {{ dateIssued }}
+                  </div>
+                }
+              </div>
+            </a>
+          }
+        </div>
       </div>
 
       <!-- Mobile: Carousel -->
@@ -84,15 +88,21 @@
                       [limitWidth]="false">
                     </ds-thumbnail>
                     <div class="news-carousel-overlay">
+                      @if (getItemType(item); as itemType) {
+                        <span class="item-badge item-badge-sm" [style.background]="getBadgeColor(itemType)">
+                          {{ itemType }}
+                        </span>
+                      }
                       @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
                         <div class="news-carousel-date">
-                          <i class="fas fa-calendar"></i>
-                          {{ dateIssued }}
+                          <i class="fas fa-calendar"></i> {{ dateIssued }}
                         </div>
                       }
                       <h3 class="news-carousel-title">{{ item.name }}</h3>
-                      @if (item.firstMetadataValue('dc.description.abstract'); as abstract) {
-                        <p class="news-carousel-text">{{ abstract }}</p>
+                      @if (getItemAuthor(item); as author) {
+                        <p class="news-carousel-author">
+                          <i class="fas fa-user"></i> {{ author }}
+                        </p>
                       }
                     </div>
                   </div>

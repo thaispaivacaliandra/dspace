@@ -53,12 +53,49 @@ export class RecentItemListComponent extends BaseComponent implements OnInit {
   private isDragging = false;
   private totalSlides = 0;
 
+  private badgeColors: Record<string, string> = {
+    'artigo': '#007D7A',
+    'article': '#007D7A',
+    'tcc': '#E8654A',
+    'trabalho de conclusão': '#E8654A',
+    'dissertação': '#8B5CF6',
+    'dissertation': '#8B5CF6',
+    'tese': '#8B5CF6',
+    'thesis': '#8B5CF6',
+    'relatório': '#F59E0B',
+    'report': '#F59E0B',
+    'livro': '#3B82F6',
+    'book': '#3B82F6',
+    'caso': '#10B981',
+    'case': '#10B981',
+    'vídeo': '#EC4899',
+    'video': '#EC4899',
+  };
+
   getItemRoute(item: Item): string {
     return getItemPageRoute(item);
   }
 
   getSecondaryItems(items: any[]): Item[] {
-    return (items || []).slice(1);
+    return (items || []).slice(1, 4);
+  }
+
+  getItemType(item: Item): string {
+    return item?.firstMetadataValue('dc.type') || '';
+  }
+
+  getItemAuthor(item: Item): string {
+    return item?.firstMetadataValue('dc.contributor.author') || '';
+  }
+
+  getBadgeColor(type: string): string {
+    const key = type?.toLowerCase() || '';
+    for (const [keyword, color] of Object.entries(this.badgeColors)) {
+      if (key.includes(keyword)) {
+        return color;
+      }
+    }
+    return '#007D7A';
   }
 
   override ngOnInit(): void {

@@ -2,11 +2,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { RootModule } from '../../app/root.module';
+import { FooterComponent } from './app/footer/footer.component';
 import { HeaderComponent } from './app/header/header.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
+import { ExploreThemesComponent } from './app/home-page/explore-themes/explore-themes.component';
 import { HomeNewsComponent } from './app/home-page/home-news/home-news.component';
 import { HomePageComponent } from './app/home-page/home-page.component';
 import { RecentItemListComponent } from './app/home-page/recent-item-list/recent-item-list.component';
+import { StatsSectionComponent } from './app/home-page/stats-section/stats-section.component';
 import { TopLevelCommunityListComponent } from './app/home-page/top-level-community-list/top-level-community-list.component';
 import { NavbarComponent } from './app/navbar/navbar.component';
 
@@ -18,9 +21,12 @@ const ENTRY_COMPONENTS = [];
 
 const DECLARATIONS = [
   ...ENTRY_COMPONENTS,
+  ExploreThemesComponent,
+  FooterComponent,
   HomeNewsComponent,
   HomePageComponent,
   RecentItemListComponent,
+  StatsSectionComponent,
   TopLevelCommunityListComponent,
   HeaderComponent,
   HeaderNavbarWrapperComponent,

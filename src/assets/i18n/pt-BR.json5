@@ -3372,7 +3372,7 @@
   "home.title": "Início",
 
   // "home.top-level-communities.head": "Communities in DSpace",
-  "home.top-level-communities.head": "Comunidades no DSpace",
+  "home.top-level-communities.head": "Comunidades",
 
   // "home.top-level-communities.help": "Select a community to browse its collections.",
   "home.top-level-communities.help": "Selecione uma comunidade para navegar por suas coleções",
@@ -9664,6 +9664,13 @@
 
   // "home.recent-submissions.head": "Recent Submissions",
   "home.recent-submissions.head": "Submissões Recentes",
+
+  // ENAP custom translations
+  "home.stats.publications": "Publicações",
+  "home.stats.communities": "Comunidades",
+  "home.stats.journal-articles": "Artigos RSP",
+  "home.stats.since": "Desde",
+  "home.explore-themes.head": "Explorar por Tema",
 
   // "listable-notification-object.default-message": "This object couldn't be retrieved",
   "listable-notification-object.default-message": "Este objeto não pôde ser recuperado",

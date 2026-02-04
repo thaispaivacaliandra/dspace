@@ -8,21 +8,23 @@ import { HomePageComponent as BaseComponent } from '../../../../app/home-page/ho
 import { ThemedTopLevelCommunityListComponent } from '../../../../app/home-page/top-level-community-list/themed-top-level-community-list.component';
 import { SuggestionsPopupComponent } from '../../../../app/notifications/suggestions/popup/suggestions-popup.component';
 import { ThemedConfigurationSearchPageComponent } from '../../../../app/search-page/themed-configuration-search-page.component';
-import { ThemedSearchFormComponent } from '../../../../app/shared/search-form/themed-search-form.component';
+import { ExploreThemesComponent } from './explore-themes/explore-themes.component';
 import { RecentItemListComponent } from './recent-item-list/recent-item-list.component';
+import { StatsSectionComponent } from './stats-section/stats-section.component';
 
 @Component({
   selector: 'ds-themed-home-page',
   styleUrls: ['../../../../app/home-page/home-page.component.scss'],
   templateUrl: './home-page.component.html',
   imports: [
+    ExploreThemesComponent,
     HomeCoarComponent,
     NgTemplateOutlet,
     RecentItemListComponent,
+    StatsSectionComponent,
     SuggestionsPopupComponent,
     ThemedConfigurationSearchPageComponent,
     ThemedHomeNewsComponent,
-    ThemedSearchFormComponent,
     ThemedTopLevelCommunityListComponent,
     TranslateModule,
   ],

@@ -1,0 +1,12 @@
+<section class="explore-section">
+  <div class="explore-container">
+    <h2 class="enap-section-title">Explorar por Tema</h2>
+    <div class="themes-grid">
+      @for (theme of themes; track theme.label) {
+        <a class="theme-pill" [routerLink]="['/search']" [queryParams]="{query: theme.query}">
+          {{ theme.label }}
+        </a>
+      }
+    </div>
+  </div>
+</section>

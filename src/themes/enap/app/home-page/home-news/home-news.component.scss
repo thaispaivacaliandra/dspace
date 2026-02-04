@@ -5,11 +5,25 @@
     color: white;
     position: relative;
     font-weight: 600;
+    overflow: hidden;
 
-    .background-image > img {
-      background-color: var(--bs-info);
+    // Video background
+    .background-video {
       position: absolute;
-      z-index: -1;
+      z-index: -2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    // Image fallback
+    .background-image > img {
+      background-color: var(--enap-primary, #024248);
+      position: absolute;
+      z-index: -2;
       top: 0;
       left: 0;
       width: 100%;
@@ -18,33 +32,31 @@
       object-position: top;
     }
 
-    .container {
-      position: relative;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
-
-      &:before, &:after {
-        content: '';
-        display: block;
-        width: var(--ds-banner-background-gradient-width);
-        height: 100%;
-        top: 0;
-        position: absolute;
-      }
-
-      &:before {
-        background: linear-gradient(to left, var(--ds-banner-text-background), transparent);
-        left: calc(-1 * var(--ds-banner-background-gradient-width));
-
-      }
-
-      &:after {
-        background: linear-gradient(to right, var(--ds-banner-text-background), transparent);
-        right: calc(-1 * var(--ds-banner-background-gradient-width));
-      }
-
-      background-color: var(--ds-banner-text-background);
+    // Dark overlay on video/image
+    .video-overlay {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(1, 33, 36, 0.5) 0%,
+        rgba(2, 66, 72, 0.4) 50%,
+        rgba(1, 33, 36, 0.6) 100%
+      );
     }
 
+    .container {
+      position: relative;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+      background-color: transparent;
+
+      &:before, &:after {
+        display: none;
+      }
+    }
 
     small.credits {
       a {
@@ -58,21 +70,42 @@
     }
   }
 
-  .home-news-content {
-    background-color: transparent;
-    min-height: 350px;
+  // Glassmorphism panel
+  .glass-panel {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(2, 66, 72, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
   }
 
+  .home-news-content {
+    background-color: transparent;
+    min-height: 420px;
+  }
+
+  .display-2 {
+    font-size: 2.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  // Search bar
   .search-banner-wrapper {
-    max-width: 600px;
+    max-width: 560px;
     text-shadow: none;
+    margin: 0 auto;
 
     ::ng-deep {
       .input-group {
         border-radius: 60px;
-        border: 1px solid var(--Gray-Gray-50, #AFBACC);
-        background: var(--White, #FFF);
-        box-shadow: 0 4px 8px 0 rgba(180, 255, 86, 0.01);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
         overflow: hidden;
       }
 
@@ -97,14 +130,45 @@
         align-items: center;
         gap: 10px;
         border-radius: 60px;
-        background: #023236;
+        background: var(--enap-primary, #024248);
         border: none;
         color: #FFF;
 
         &:hover {
-          background: darken(#023236, 5%);
+          background: var(--enap-dark, #012124);
         }
       }
+    }
+  }
+
+  // Popular chips
+  .popular-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1.25rem;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 16px;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    text-shadow: none;
+    transition: all 0.25s ease;
+    background: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: white;
+      color: white;
+      transform: translateY(-1px);
     }
   }
 
@@ -117,9 +181,40 @@
   }
 
   .lead {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 400;
+    opacity: 0.9;
+  }
+
+  // Responsive: show video on desktop, image on mobile
+  .desktop-only {
+    display: block;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+      display: block;
+    }
+
+    .display-2 {
+      font-size: 2rem;
+    }
+
+    .glass-panel {
+      border-radius: 16px;
+    }
+
+    .chip {
+      font-size: 0.8rem;
+      padding: 5px 12px;
+    }
   }
 }
-
-
