@@ -3,3 +3,25 @@ rest:
   host: sandbox.dspace.org
   port: 443
   nameSpace: /server
+
+themes:
+  - name: enap
+    headTags:
+    - tagName: link
+      attributes:
+        rel: icon
+        href: assets/enap/images/favicons/favicon.ico
+        sizes: any
+    - tagName: link
+      attributes:
+        rel: icon
+        href: assets/enap/images/favicons/favicon.svg
+        type: image/svg+xml
+    - tagName: link
+      attributes:
+        rel: apple-touch-icon
+        href: assets/enap/images/favicons/apple-touch-icon.png
+    - tagName: link
+      attributes:
+        rel: manifest
+        href: assets/enap/images/favicons/manifest.webmanifest

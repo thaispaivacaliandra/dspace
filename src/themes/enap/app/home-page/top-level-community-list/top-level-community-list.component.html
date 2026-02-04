@@ -1,0 +1,48 @@
+<ng-container *ngVar="(communitiesRD$ | async) as communitiesRD">
+  @if (communitiesRD?.isLoading) {
+    <ds-loading message="{{'loading.top-level-communities' | translate}}"></ds-loading>
+  }
+  @if (communitiesRD?.hasFailed) {
+    <ds-error message="{{'error.top-level-communities' | translate}}"></ds-error>
+  }
+  @if (communitiesRD?.hasSucceeded) {
+    <div class="community-carousel">
+      <div class="carousel-header">
+        <h2>{{'home.top-level-communities.head' | translate}}</h2>
+        <div class="carousel-controls">
+          <button class="carousel-btn" (click)="scrollPrev()" aria-label="Anterior">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn" (click)="scrollNext()" aria-label="Próximo">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="carousel-track" #carouselTrack>
+        @for (community of communitiesRD.payload?.page; track community.id) {
+          <a class="carousel-card" [routerLink]="['/communities', community.id]">
+            <div class="card-thumbnail">
+              <ds-thumbnail
+                [thumbnail]="(community.logo | async)?.payload"
+                [limitWidth]="false">
+              </ds-thumbnail>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">{{ community.name }}</h3>
+              @if (community.shortDescription) {
+                <p class="card-description">{{ community.shortDescription }}</p>
+              }
+              @if (community.archivedItemsCount > 0) {
+                <span class="card-badge">
+                  <i class="fas fa-file-alt me-1"></i>
+                  {{ community.archivedItemsCount }}
+                </span>
+              }
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  }
+</ng-container>

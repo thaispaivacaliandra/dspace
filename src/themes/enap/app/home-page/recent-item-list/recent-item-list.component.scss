@@ -1,0 +1,501 @@
+// === Base Styles ===
+.news-section {
+  max-width: 1142px;
+  margin: auto;
+  padding: 60px 15px;
+}
+
+.news-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.h2-title {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 600;
+}
+
+// === Desktop Grid ===
+.news-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+  max-height: 600px;
+}
+
+.news-grid-main {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  max-height: 600px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  &:hover ::ng-deep img {
+    transform: scale(1.05);
+  }
+}
+
+.news-main-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.news-main-image {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+
+  ::ng-deep {
+    ds-thumbnail,
+    ds-base-thumbnail {
+      width: 100%;
+      height: 100%;
+      display: flex;
+
+      .thumbnail {
+        width: 100%;
+        height: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .thumbnail-content.outer {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #43515f 0%, #1e6f90 100%);
+      }
+    }
+  }
+}
+
+.news-main-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  padding: 40px 25px 25px;
+  color: white;
+}
+
+.news-main-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.3;
+  color: white;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-main-text {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-main-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+// === Secondary Items ===
+.news-grid-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.news-secondary-item {
+  display: flex;
+  gap: 15px;
+  background: white;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  align-items: stretch;
+
+  &:hover {
+    .news-secondary-title {
+      text-decoration: underline;
+    }
+
+    ::ng-deep img {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.news-secondary-image {
+  width: 150px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  max-height: 200px;
+
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  ::ng-deep {
+    ds-thumbnail,
+    ds-base-thumbnail {
+      width: 100%;
+      height: 100%;
+      display: flex;
+
+      .thumbnail {
+        width: 100%;
+        height: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .thumbnail-content.outer {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #43515f 0%, #1e6f90 100%);
+        border-radius: 6px;
+      }
+    }
+  }
+}
+
+.news-secondary-link {
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+  min-width: 0;
+}
+
+.news-secondary-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 5px 0;
+}
+
+.news-secondary-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  color: #007D7A;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-secondary-text {
+  font-size: 14px;
+  color: #525155;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-secondary-date {
+  font-size: 12px;
+  color: #525155;
+  margin-top: 5px;
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+// === Mobile Carousel ===
+.news-carousel-container {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.news-carousel {
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding: 0;
+  height: 50vh;
+  min-height: 300px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.news-carousel-track {
+  display: flex;
+  height: 100%;
+  -webkit-transform: translateX(0);
+}
+
+.news-carousel-slide {
+  flex: 0 0 70vw;
+  position: relative;
+  margin-right: 4vw;
+  height: 100%;
+}
+
+.news-carousel-link {
+  display: block;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.news-carousel-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  ::ng-deep {
+    ds-thumbnail,
+    ds-base-thumbnail {
+      width: 100%;
+      height: 100%;
+      display: flex;
+
+      .thumbnail {
+        width: 100%;
+        height: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .thumbnail-content.outer {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #43515f 0%, #1e6f90 100%);
+      }
+    }
+  }
+}
+
+.news-carousel-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 30px 20px 20px;
+  color: white;
+}
+
+.news-carousel-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  color: white;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-carousel-text {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  margin: 0;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-carousel-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 10px;
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+// === Indicators ===
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 125, 122, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  -webkit-appearance: none;
+
+  &.active {
+    background: #007D7A;
+    transform: scale(1.2);
+  }
+}
+
+// === Button ===
+.news-actions {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.btn-todos {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  text-decoration: none;
+  color: #007D7A;
+  border: 1px solid #007D7A;
+  padding: 8px 24px;
+  border-radius: 40px;
+  background-color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+
+  &:hover {
+    color: white;
+    background-color: #006969;
+    border-color: #006969;
+  }
+
+  &:active {
+    color: #ffffff;
+    background-color: #025257;
+    border-color: #025257;
+  }
+}
+
+// === Responsive ===
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: grid;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .news-section {
+    padding: 40px 0 40px 15px;
+  }
+
+  .news-header {
+    text-align: left;
+    margin-bottom: 30px;
+  }
+
+  .h2-title {
+    font-size: 32px;
+    text-align: left;
+  }
+
+  .news-carousel-container {
+    height: 55vh;
+    min-height: 320px;
+  }
+
+  .news-carousel {
+    height: 100%;
+  }
+
+  .news-carousel-slide {
+    flex: 0 0 75vw;
+  }
+
+  .news-carousel-title {
+    font-size: 16px;
+  }
+
+  .news-carousel-text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .news-section {
+    padding: 30px 0 30px 15px;
+  }
+
+  .h2-title {
+    font-size: 28px;
+  }
+
+  .news-carousel-slide {
+    flex: 0 0 85vw;
+  }
+
+  .news-carousel-container {
+    height: 45vh;
+    min-height: 280px;
+  }
+}
+
+// === Safari Fixes ===
+@supports (-webkit-touch-callout: none) {
+  .news-carousel {
+    height: -webkit-fill-available;
+  }
+}

@@ -1,0 +1,130 @@
+<ng-container *ngVar="(itemRD$ | async) as itemRD">
+  @if (itemRD?.hasSucceeded && itemRD?.payload?.page.length > 0) {
+    <section class="news-section">
+      <div class="news-header">
+        <h2 class="h2-title">{{ 'home.recent-submissions.head' | translate }}</h2>
+      </div>
+
+      <!-- Desktop: Grid Layout -->
+      <div class="news-grid-container desktop-only">
+        <!-- Main featured item -->
+        <div class="news-grid-main">
+          <a [routerLink]="[getItemRoute(itemRD.payload.page[0])]"
+             class="news-main-link"
+             [title]="itemRD.payload.page[0].name">
+            <div class="news-main-image">
+              <ds-thumbnail
+                [thumbnail]="itemRD.payload.page[0]?.thumbnail | async"
+                [limitWidth]="false">
+              </ds-thumbnail>
+              <div class="news-main-overlay">
+                <h3 class="news-main-title">{{ itemRD.payload.page[0].name }}</h3>
+                @if (itemRD.payload.page[0].firstMetadataValue('dc.description.abstract'); as abstract) {
+                  <p class="news-main-text">{{ abstract }}</p>
+                }
+                @if (itemRD.payload.page[0].firstMetadataValue('dc.date.issued'); as dateIssued) {
+                  <div class="news-main-date">
+                    <i class="fas fa-calendar"></i>
+                    {{ dateIssued }}
+                  </div>
+                }
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Secondary items -->
+        @if (itemRD.payload.page.length > 1) {
+          <div class="news-grid-secondary">
+            @for (item of getSecondaryItems(itemRD.payload.page); track item) {
+              <div class="news-secondary-item">
+                <div class="news-secondary-image">
+                  <a [routerLink]="[getItemRoute(item)]" tabindex="-1" [title]="item.name">
+                    <ds-thumbnail
+                      [thumbnail]="item?.thumbnail | async"
+                      [limitWidth]="false">
+                    </ds-thumbnail>
+                  </a>
+                </div>
+                <a [routerLink]="[getItemRoute(item)]" class="news-secondary-link">
+                  <div class="news-secondary-content">
+                    <h4 class="news-secondary-title">{{ item.name }}</h4>
+                    @if (item.firstMetadataValue('dc.description.abstract'); as abstract) {
+                      <p class="news-secondary-text">{{ abstract }}</p>
+                    }
+                    @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
+                      <div class="news-secondary-date">
+                        <i class="fas fa-calendar"></i>
+                        {{ dateIssued }}
+                      </div>
+                    }
+                  </div>
+                </a>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Mobile: Carousel -->
+      <div class="news-carousel-container mobile-only">
+        <div class="news-carousel">
+          <div class="news-carousel-track"
+               [style.transform]="'translateX(' + carouselTranslate + 'vw)'"
+               [style.transition]="carouselTransition"
+               (touchstart)="onTouchStart($event)"
+               (touchmove)="onTouchMove($event)"
+               (touchend)="onTouchEnd()">
+            @for (item of $any(itemRD.payload.page); track item) {
+              <div class="news-carousel-slide">
+                <a [routerLink]="[getItemRoute(item)]" class="news-carousel-link" [title]="item.name">
+                  <div class="news-carousel-image">
+                    <ds-thumbnail
+                      [thumbnail]="item?.thumbnail | async"
+                      [limitWidth]="false">
+                    </ds-thumbnail>
+                    <div class="news-carousel-overlay">
+                      @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
+                        <div class="news-carousel-date">
+                          <i class="fas fa-calendar"></i>
+                          {{ dateIssued }}
+                        </div>
+                      }
+                      <h3 class="news-carousel-title">{{ item.name }}</h3>
+                      @if (item.firstMetadataValue('dc.description.abstract'); as abstract) {
+                        <p class="news-carousel-text">{{ abstract }}</p>
+                      }
+                    </div>
+                  </div>
+                </a>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+          @for (item of $any(itemRD.payload.page); track item; let i = $index) {
+            <button class="carousel-indicator"
+                    [class.active]="i === currentSlide"
+                    (click)="goToSlide(i)"
+                    [attr.aria-label]="'Ir para item ' + (i + 1)">
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="news-actions">
+        <button (click)="onLoadMore()" class="btn-todos" role="link" tabindex="0">
+          Ver todas as publicações
+        </button>
+      </div>
+    </section>
+  }
+  @if (itemRD?.hasFailed) {
+    <ds-error message="{{'error.recent-submissions' | translate}}"></ds-error>
+  }
+  @if (!itemRD || itemRD.isLoading) {
+    <ds-loading message="{{'loading.recent-submissions' | translate}}"></ds-loading>
+  }
+</ng-container>

@@ -1,0 +1,125 @@
+:host {
+  display: block;
+
+  div.background-image-container {
+    color: white;
+    position: relative;
+    font-weight: 600;
+
+    .background-image > img {
+      background-color: var(--bs-info);
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .container {
+      position: relative;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+
+      &:before, &:after {
+        content: '';
+        display: block;
+        width: var(--ds-banner-background-gradient-width);
+        height: 100%;
+        top: 0;
+        position: absolute;
+      }
+
+      &:before {
+        background: linear-gradient(to left, var(--ds-banner-text-background), transparent);
+        left: calc(-1 * var(--ds-banner-background-gradient-width));
+
+      }
+
+      &:after {
+        background: linear-gradient(to right, var(--ds-banner-text-background), transparent);
+        right: calc(-1 * var(--ds-banner-background-gradient-width));
+      }
+
+      background-color: var(--ds-banner-text-background);
+    }
+
+
+    small.credits {
+      a {
+        color: inherit;
+      }
+
+      opacity: 0.3;
+      position: absolute;
+      right: var(--bs-spacer);
+      bottom: 0;
+    }
+  }
+
+  .home-news-content {
+    background-color: transparent;
+    min-height: 350px;
+  }
+
+  .search-banner-wrapper {
+    max-width: 600px;
+    text-shadow: none;
+
+    ::ng-deep {
+      .input-group {
+        border-radius: 60px;
+        border: 1px solid var(--Gray-Gray-50, #AFBACC);
+        background: var(--White, #FFF);
+        box-shadow: 0 4px 8px 0 rgba(180, 255, 86, 0.01);
+        overflow: hidden;
+      }
+
+      .form-control {
+        border: none;
+        background: transparent;
+        border-radius: 60px 0 0 60px;
+
+        &:focus {
+          box-shadow: none;
+          outline: none;
+        }
+      }
+
+      .search-button {
+        display: flex;
+        width: 102px;
+        height: 40px;
+        padding: 4px 8px 4px 12px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 60px;
+        background: #023236;
+        border: none;
+        color: #FFF;
+
+        &:hover {
+          background: darken(#023236, 5%);
+        }
+      }
+    }
+  }
+
+  a {
+    color: var(--ds-home-news-link-color);
+
+    &:hover {
+      color: var(--ds-home-news-link-hover-color);
+    }
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 400;
+  }
+}
+
+

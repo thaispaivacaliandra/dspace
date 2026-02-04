@@ -455,26 +455,26 @@ themes:
   # # This theme will use the default bootstrap styling for DSpace components
   # - name: BASE_THEME_NAME
   #
-  - name: dspace
+  - name: enap
     headTags:
     - tagName: link
       attributes:
         rel: icon
-        href: assets/dspace/images/favicons/favicon.ico
+        href: assets/enap/images/favicons/favicon.ico
         sizes: any
     - tagName: link
       attributes:
         rel: icon
-        href: assets/dspace/images/favicons/favicon.svg
+        href: assets/enap/images/favicons/favicon.svg
         type: image/svg+xml
     - tagName: link
       attributes:
         rel: apple-touch-icon
-        href: assets/dspace/images/favicons/apple-touch-icon.png
+        href: assets/enap/images/favicons/apple-touch-icon.png
     - tagName: link
       attributes:
         rel: manifest
-        href: assets/dspace/images/favicons/manifest.webmanifest
+        href: assets/enap/images/favicons/manifest.webmanifest
 
 # The default bundles that should always be displayed as suggestions when you upload a new bundle
 bundle:
