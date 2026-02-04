@@ -1,0 +1,72 @@
+.enap-item-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 0;
+  align-items: flex-start;
+  border-bottom: 1px solid #AFBACC !important;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.enap-type-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.enap-item-title {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  color: #025257;
+  text-decoration: none;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  transition: color var(--enap-transition, 0.3s ease);
+
+  &:hover {
+    color: var(--enap-accent, #007D7A);
+    text-decoration: underline;
+  }
+}
+
+.enap-item-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.enap-meta-line {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.enap-meta-label {
+  font-weight: 600;
+  color: var(--enap-primary, #024248);
+  margin-right: 0.35rem;
+}
+
+.enap-meta-value {
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .enap-item-title {
+    font-size: 1rem;
+  }
+
+  .enap-meta-line {
+    font-size: 0.85rem;
+  }
+}

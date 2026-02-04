@@ -1,0 +1,103 @@
+@if ((dataSource.loading$ | async) && !loadingNode) {
+  <ds-loading class="ds-themed-loading"></ds-loading>
+}
+<cdk-tree [dataSource]="dataSource" [treeControl]="treeControl" [trackBy]="trackBy" class="enap-community-tree">
+  <!-- Show more node -->
+  <cdk-tree-node *cdkTreeNodeDef="let node; when: isShowMore" cdkTreeNodePadding
+    class="enap-tree-node enap-show-more-node">
+    <div class="enap-node-content">
+      <span class="enap-node-indent" aria-hidden="true"></span>
+      <div class="enap-show-more-wrapper">
+        @if ((dataSource.loading$ | async) !== true) {
+          <button (click)="getNextPage(node)"
+            class="enap-btn-show-more" role="button" tabindex="0" data-test="show-more-button">
+            <i class="fas fa-angle-down me-1"></i> {{ 'communityList.showMore' | translate }}
+          </button>
+        }
+        @if (node===loadingNode && dataSource.loading$ | async) {
+          <ds-loading class="ds-themed-loading"></ds-loading>
+        }
+      </div>
+    </div>
+  </cdk-tree-node>
+
+  <!-- Expandable node (communities and subcommunities with children) -->
+  <cdk-tree-node *cdkTreeNodeDef="let node; when: hasChild" cdkTreeNodePadding
+    class="enap-tree-node enap-expandable-node" [class.enap-node-expanded]="node.isExpanded" [class.enap-root-node]="node.level === 0">
+    <div class="enap-node-card">
+      <div class="enap-node-content">
+        @if (hasChild(null, node) | async) {
+          <button type="button" class="enap-toggle-btn" cdkTreeNodeToggle
+            [attr.aria-label]="(node.isExpanded ? 'communityList.collapse' : 'communityList.expand') | translate:{ name: dsoNameService.getName(node.payload) }"
+            (click)="toggleExpanded(node)"
+            (keyup.enter)="toggleExpanded(node)"
+            (keyup.space)="toggleExpanded(node)"
+            data-test="expand-button"
+            role="button"
+            tabindex="0">
+            <span class="enap-chevron" [class.enap-chevron-expanded]="node.isExpanded" aria-hidden="true">
+              <i class="fas fa-chevron-right"></i>
+            </span>
+          </button>
+        }
+        @if ((hasChild(null, node) | async) !== true) {
+          <span class="enap-toggle-btn enap-toggle-placeholder" aria-hidden="true">
+            <span class="enap-chevron">
+              <i class="fas fa-chevron-right"></i>
+            </span>
+          </span>
+        }
+        <span class="enap-node-icon" aria-hidden="true">
+          <i class="fas" [class.fa-folder-open]="node.isExpanded" [class.fa-folder]="!node.isExpanded"></i>
+        </span>
+        <div class="enap-node-info">
+          <a [routerLink]="node.route" class="enap-node-name" role="link" tabindex="0">{{ dsoNameService.getName(node.payload) }}</a>
+          @if (node.payload.archivedItemsCount >= 0) {
+            <span class="enap-item-badge">
+              <i class="fas fa-file-alt me-1"></i>{{ node.payload.archivedItemsCount }}
+            </span>
+          }
+        </div>
+      </div>
+      <ds-truncatable [id]="node.id">
+        @if (node.payload.shortDescription) {
+          <div class="enap-node-description">
+            <ds-truncatable-part [id]="node.id" [minLines]="2">
+              <span>{{ node.payload.shortDescription }}</span>
+            </ds-truncatable-part>
+          </div>
+        }
+      </ds-truncatable>
+    </div>
+    @if (node===loadingNode && dataSource.loading$ | async) {
+      <div class="enap-node-loading">
+        <ds-loading class="ds-themed-loading"></ds-loading>
+      </div>
+    }
+  </cdk-tree-node>
+
+  <!-- Leaf node (collections and communities without children) -->
+  <cdk-tree-node *cdkTreeNodeDef="let node; when: !(hasChild && isShowMore)" cdkTreeNodePadding
+    class="enap-tree-node enap-leaf-node">
+    <div class="enap-node-card enap-leaf-card">
+      <div class="enap-node-content">
+        <span class="enap-toggle-btn enap-toggle-placeholder" aria-hidden="true"></span>
+        <span class="enap-node-icon enap-leaf-icon" aria-hidden="true">
+          <i class="fas fa-archive"></i>
+        </span>
+        <div class="enap-node-info">
+          <a [routerLink]="node.route" class="enap-node-name enap-leaf-name" role="link" tabindex="0">{{ dsoNameService.getName(node.payload) }}</a>
+        </div>
+      </div>
+      <ds-truncatable [id]="node.id">
+        @if (node.payload.shortDescription) {
+          <div class="enap-node-description">
+            <ds-truncatable-part [id]="node.id" [minLines]="2">
+              <span>{{ node.payload.shortDescription }}</span>
+            </ds-truncatable-part>
+          </div>
+        }
+      </ds-truncatable>
+    </div>
+  </cdk-tree-node>
+</cdk-tree>

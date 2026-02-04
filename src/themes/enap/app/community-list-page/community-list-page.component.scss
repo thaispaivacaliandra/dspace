@@ -1,0 +1,28 @@
+.community-list-page {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.community-list-header {
+  margin-bottom: 2.5rem;
+}
+
+.community-list-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.05rem;
+  margin-top: -1.5rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .community-list-page {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .community-list-subtitle {
+    font-size: 0.95rem;
+    margin-top: -1rem;
+  }
+}

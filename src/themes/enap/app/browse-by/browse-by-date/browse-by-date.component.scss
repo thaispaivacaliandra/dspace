@@ -1,0 +1,86 @@
+.enap-browse-page {
+  background: white;
+  min-height: 60vh;
+}
+
+.enap-browse-container {
+  max-width: 1142px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+:host ::ng-deep {
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--enap-primary, #024248);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--enap-accent, #007D7A);
+  }
+
+  .list-group {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .list-group-item {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  ds-starts-with-date,
+  .starts-with {
+    background: var(--enap-bg-light, #f8fafa);
+    border-radius: var(--enap-card-radius, 16px);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pagination {
+    .page-link {
+      color: var(--enap-primary, #024248);
+      border-radius: 8px;
+      margin: 0 2px;
+      border-color: #e5e7eb;
+
+      &:hover {
+        background-color: var(--enap-accent, #007D7A);
+        color: white;
+        border-color: var(--enap-accent, #007D7A);
+      }
+    }
+
+    .page-item.active .page-link {
+      background-color: var(--enap-primary, #024248);
+      border-color: var(--enap-primary, #024248);
+      color: white;
+    }
+  }
+
+  .reset .btn {
+    color: var(--enap-primary, #024248);
+    border-color: var(--enap-primary, #024248);
+    border-radius: var(--enap-btn-radius, 40px);
+
+    &:hover {
+      background-color: var(--enap-primary, #024248);
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .enap-browse-container {
+    padding: 1.5rem 0.75rem;
+  }
+
+  :host ::ng-deep {
+    h1 {
+      font-size: 1.4rem;
+    }
+  }
+}

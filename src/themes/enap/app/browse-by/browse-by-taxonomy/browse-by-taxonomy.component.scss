@@ -1,0 +1,89 @@
+.enap-browse-page {
+  background: white;
+  min-height: 60vh;
+}
+
+.enap-browse-container {
+  max-width: 1142px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--enap-primary, #024248);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--enap-accent, #007D7A);
+}
+
+.enap-treeview-wrapper {
+  background: var(--enap-bg-light, #f8fafa);
+  border-radius: var(--enap-card-radius, 16px);
+  padding: 1.5rem;
+}
+
+.enap-browse-btn {
+  display: inline-block;
+  background-color: var(--enap-accent, #007D7A);
+  color: white;
+  border-radius: var(--enap-btn-radius, 40px);
+  padding: 0.6rem 1.8rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color var(--enap-transition, 0.3s ease);
+
+  &:hover {
+    background-color: var(--enap-primary, #024248);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+:host ::ng-deep {
+  .tree-container {
+    border: none;
+    border-radius: var(--enap-card-radius, 16px);
+
+    .tree-node {
+      padding: 0.4rem 0;
+
+      a {
+        color: var(--enap-primary, #024248);
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+          color: var(--enap-accent, #007D7A);
+        }
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: var(--enap-accent, #007D7A);
+    border-color: var(--enap-accent, #007D7A);
+    border-radius: var(--enap-btn-radius, 40px);
+
+    &:hover {
+      background-color: var(--enap-primary, #024248);
+      border-color: var(--enap-primary, #024248);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .enap-browse-container {
+    padding: 1.5rem 0.75rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  .enap-treeview-wrapper {
+    padding: 1rem;
+  }
+}

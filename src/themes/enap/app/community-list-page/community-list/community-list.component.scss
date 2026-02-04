@@ -1,0 +1,314 @@
+// ── ENAP Community List Tree Styles ──
+
+$enap-primary: var(--enap-primary, #024248);
+$enap-accent: var(--enap-accent, #007D7A);
+$enap-card-radius: var(--enap-card-radius, 16px);
+$enap-shadow: var(--enap-shadow, 0 4px 24px rgba(0, 0, 0, 0.08));
+$enap-shadow-hover: var(--enap-shadow-hover, 0 12px 32px rgba(0, 0, 0, 0.14));
+$enap-transition: var(--enap-transition, 0.3s ease);
+
+// ── Tree container ──
+.enap-community-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+// ── Base node ──
+.enap-tree-node {
+  display: block;
+}
+
+// ── Node card ──
+.enap-node-card {
+  background: #fff;
+  border-radius: $enap-card-radius;
+  padding: 1.25rem 1.5rem;
+  box-shadow: $enap-shadow;
+  transition: transform $enap-transition, box-shadow $enap-transition;
+  border: 1px solid transparent;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $enap-shadow-hover;
+  }
+}
+
+// ── Root-level nodes get stronger presence ──
+.enap-root-node > .enap-node-card {
+  padding: 1.5rem 1.75rem;
+}
+
+// ── Expanded state ──
+.enap-node-expanded > .enap-node-card {
+  border-left: 3px solid $enap-accent;
+}
+
+// ── Node content row ──
+.enap-node-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+// ── Toggle button ──
+.enap-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border: none;
+  background: rgba(0, 125, 122, 0.08);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  transition: background $enap-transition;
+  color: $enap-accent;
+
+  &:hover {
+    background: rgba(0, 125, 122, 0.16);
+  }
+
+  &:focus-visible {
+    outline: 3px solid $enap-accent;
+    outline-offset: 2px;
+  }
+}
+
+.enap-toggle-placeholder {
+  background: transparent;
+  cursor: default;
+  visibility: hidden;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+// ── Chevron animation ──
+.enap-chevron {
+  display: inline-flex;
+  transition: transform 0.25s ease;
+
+  i {
+    font-size: 0.75rem;
+  }
+}
+
+.enap-chevron-expanded {
+  transform: rotate(90deg);
+}
+
+// ── Node icon ──
+.enap-node-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 10px;
+  background: rgba(0, 125, 122, 0.08);
+  color: $enap-accent;
+  font-size: 1.1rem;
+  transition: background $enap-transition, color $enap-transition;
+}
+
+.enap-node-card:hover .enap-node-icon {
+  background: rgba(0, 125, 122, 0.14);
+}
+
+// ── Leaf icon (collections) ──
+.enap-leaf-icon {
+  background: rgba(2, 66, 72, 0.06);
+  color: $enap-primary;
+  font-size: 0.95rem;
+}
+
+// ── Leaf card ──
+.enap-leaf-card {
+  background: var(--enap-bg-light, #f8fafa);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 1rem 1.5rem;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+}
+
+// ── Node info ──
+.enap-node-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+// ── Node name ──
+.enap-node-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $enap-primary;
+  text-decoration: none;
+  transition: color $enap-transition;
+
+  &:hover {
+    color: $enap-accent;
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $enap-accent;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.enap-leaf-name {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+// ── Item count badge ──
+.enap-item-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.7rem;
+  background: rgba(0, 125, 122, 0.08);
+  color: $enap-accent;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+// ── Node description ──
+.enap-node-description {
+  margin-top: 0.5rem;
+  padding-left: calc(32px + 40px + 1.5rem); // toggle + icon + gaps
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+// ── Loading state ──
+.enap-node-loading {
+  padding-left: calc(32px + 40px + 1.5rem);
+  margin-top: 0.5rem;
+}
+
+// ── Show more node ──
+.enap-show-more-node {
+  .enap-node-content {
+    padding-left: 0;
+  }
+}
+
+.enap-node-indent {
+  display: inline-block;
+  width: calc(32px + 40px + 0.75rem); // match toggle + icon + gap
+}
+
+.enap-btn-show-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem 1.2rem;
+  border: 1.5px solid $enap-accent;
+  background: white;
+  color: $enap-accent;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all $enap-transition;
+
+  &:hover {
+    background: $enap-accent;
+    color: white;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $enap-accent;
+    outline-offset: 2px;
+  }
+}
+
+// ── Indentation via CDK tree padding ──
+::ng-deep .cdk-tree {
+  .enap-tree-node {
+    // CDK tree applies padding-left for indentation via cdkTreeNodePadding
+    // We enhance the visual with a subtle left border for nested items
+  }
+}
+
+// ── Responsive ──
+@media (max-width: 768px) {
+  .enap-node-card {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .enap-root-node > .enap-node-card {
+    padding: 1.25rem;
+  }
+
+  .enap-node-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 1rem;
+  }
+
+  .enap-node-name {
+    font-size: 1rem;
+  }
+
+  .enap-leaf-name {
+    font-size: 0.9rem;
+  }
+
+  .enap-node-description {
+    padding-left: calc(32px + 36px + 1.5rem);
+    font-size: 0.85rem;
+  }
+
+  .enap-item-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .enap-toggle-btn {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+  }
+
+  .enap-node-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .enap-node-content {
+    gap: 0.5rem;
+  }
+
+  .enap-node-description {
+    padding-left: calc(28px + 32px + 1rem);
+  }
+
+  .enap-node-info {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+}

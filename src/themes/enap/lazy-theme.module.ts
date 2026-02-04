@@ -14,6 +14,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 import { RootModule } from '../../app/root.module';
+import { BrowseByDateComponent } from './app/browse-by/browse-by-date/browse-by-date.component';
+import { BrowseByMetadataComponent } from './app/browse-by/browse-by-metadata/browse-by-metadata.component';
+import { BrowseByTaxonomyComponent } from './app/browse-by/browse-by-taxonomy/browse-by-taxonomy.component';
+import { BrowseByTitleComponent } from './app/browse-by/browse-by-title/browse-by-title.component';
+import { CommunityListComponent } from './app/community-list-page/community-list/community-list.component';
+import { CommunityListPageComponent } from './app/community-list-page/community-list-page.component';
 
 const DECLARATIONS = [
 ];
@@ -32,6 +38,12 @@ const DECLARATIONS = [
     StoreRouterConnectingModule,
     TranslateModule,
     FormsModule,
+    BrowseByDateComponent,
+    BrowseByMetadataComponent,
+    BrowseByTaxonomyComponent,
+    BrowseByTitleComponent,
+    CommunityListPageComponent,
+    CommunityListComponent,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

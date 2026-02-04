@@ -1,0 +1,44 @@
+<div class="enap-item-row">
+  @if (itemType) {
+    <span class="enap-type-badge" [style.background]="badgeColor">
+      {{ itemType }}
+    </span>
+  }
+
+  @if (object !== undefined && object !== null) {
+    @if (linkType !== linkTypes.None) {
+      <a [target]="(linkType === linkTypes.ExternalLink) ? '_blank' : '_self'"
+        [attr.rel]="(linkType === linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
+        [routerLink]="[itemPageRoute]"
+        class="enap-item-title"
+        [innerHTML]="dsoTitle"
+        role="link"
+        tabindex="0">
+      </a>
+    }
+    @if (linkType === linkTypes.None) {
+      <span class="enap-item-title" [innerHTML]="dsoTitle"></span>
+    }
+  }
+
+  <div class="enap-item-meta">
+    @if (itemAuthor) {
+      <div class="enap-meta-line">
+        <span class="enap-meta-label">Autor:</span>
+        <span class="enap-meta-value">{{ itemAuthor }}</span>
+      </div>
+    }
+    @if (itemLanguage) {
+      <div class="enap-meta-line">
+        <span class="enap-meta-label">Linguagem:</span>
+        <span class="enap-meta-value">{{ itemLanguage }}</span>
+      </div>
+    }
+    @if (itemDate) {
+      <div class="enap-meta-line">
+        <span class="enap-meta-label">Publicação:</span>
+        <span class="enap-meta-value">{{ itemDate }}</span>
+      </div>
+    }
+  </div>
+</div>
