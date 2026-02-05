@@ -1,12 +1,35 @@
+form.d-flex {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid var(--ds-header-icon-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 input[type="text"] {
   margin-top: 0;
-  background-color: #fff !important;
-  border-color: var(--ds-header-icon-color);
+  background-color: transparent !important;
+  border: none;
   overflow: hidden;
+  padding-right: 2.5rem;
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
 
   &.collapsed {
     opacity: 0;
     padding: 0;
     border: none;
   }
+}
+
+.submit-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  color: var(--ds-header-icon-color);
 }
