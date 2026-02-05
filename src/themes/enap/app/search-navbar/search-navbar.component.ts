@@ -56,8 +56,8 @@ const expandSearchInputWide = trigger('toggleAnimation', [
 
 @Component({
   selector: 'ds-themed-search-navbar',
-  templateUrl: '../../../../app/search-navbar/search-navbar.component.html',
-  styleUrls: ['../../../../app/search-navbar/search-navbar.component.scss'],
+  templateUrl: './search-navbar.component.html',
+  styleUrls: ['../../../../app/search-navbar/search-navbar.component.scss', './search-navbar.component.scss'],
   animations: [expandSearchInputWide],
   imports: [
     BrowserOnlyPipe,

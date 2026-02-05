@@ -1,0 +1,12 @@
+input[type="text"] {
+  margin-top: 0;
+  background-color: #fff !important;
+  border-color: var(--ds-header-icon-color);
+  overflow: hidden;
+
+  &.collapsed {
+    opacity: 0;
+    padding: 0;
+    border: none;
+  }
+}
