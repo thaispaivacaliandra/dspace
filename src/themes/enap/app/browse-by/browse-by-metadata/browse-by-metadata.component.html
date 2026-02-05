@@ -1,26 +1,77 @@
 @if ((!ssrRenderingDisabled)) {
-  <section class="enap-browse-page">
+  <section class="enap-browse-page enap-section">
     <div class="enap-browse-container">
       @if ((loading$ | async) !== true) {
-        <ds-browse-by class="col-12 w-100"
-                       title="{{'browse.title' | translate:{
-                         field: 'browse.metadata.' + browseId | translate,
-                         startsWith: (startsWith)? ('browse.startsWith' | translate: { startsWith: '&quot;' + startsWith + '&quot;' }) : '',
-                         value: (value)? '&quot;' + value + '&quot;': ''
-                       } }}"
-          [displayTitle]="displayTitle"
-          [objects$]="(items$ !== undefined)? items$ : browseEntries$"
-          [paginationConfig]="(currentPagination$ |async)"
-          [sortConfig]="(currentSort$ |async)"
-          [type]="startsWithType"
-          [startsWithOptions]="startsWithOptions"
-          (prev)="goPrev()"
-          (next)="goNext()">
-        </ds-browse-by>
+        @if (!value) {
+          <!-- Browse entries (authors, subjects, etc.) -->
+          <div class="enap-browse-header">
+            <h1 class="enap-section-title">{{'browse.metadata.' + browseId | translate}}</h1>
+          </div>
+
+          @if (browseEntries$ | async; as entriesRD) {
+            @if (entriesRD.hasSucceeded && entriesRD.payload?.page?.length > 0) {
+              <ds-pagination
+                [paginationOptions]="(currentPagination$ | async)"
+                [collectionSize]="entriesRD.payload?.totalElements"
+                [objects]="entriesRD"
+                [sortOptions]="(currentSort$ | async)"
+                [hideGear]="true"
+                [hidePaginationDetail]="true"
+                (prev)="goPrev()"
+                (next)="goNext()">
+                <div class="enap-entries-tree">
+                  @for (entry of entriesRD.payload.page; track entry.value) {
+                    <a [routerLink]="[]"
+                                [queryParams]="getEntryQueryParams(entry)"
+                                class="enap-node-name">
+                    <div class="enap-entry-node">
+                      <div class="enap-node-card">
+                        <div class="enap-node-content">
+                          <span class="enap-node-icon" aria-hidden="true">
+                            <i class="fas" [ngClass]="getEntryIcon()"></i>
+                          </span>
+                          <div class="enap-node-info">
+                              {{ entry.value }}
+                            <span class="enap-item-badge">
+                              <i class="fas fa-file-alt me-1"></i>{{ entry.count }}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                  }
+                </div>
+              </ds-pagination>
+            }
+            @if (entriesRD.isLoading) {
+              <ds-loading message="{{'loading.browse-by-page' | translate}}"></ds-loading>
+            }
+          }
+        } @else {
+          <!-- Items for a specific value -->
+          <ds-browse-by class="col-12 w-100"
+                         title="{{'browse.title' | translate:{
+                           field: 'browse.metadata.' + browseId | translate,
+                           startsWith: (startsWith)? ('browse.startsWith' | translate: { startsWith: '&quot;' + startsWith + '&quot;' }) : '',
+                           value: (value)? '&quot;' + value + '&quot;': ''
+                         } }}"
+            [displayTitle]="displayTitle"
+            [objects$]="(items$ !== undefined)? items$ : browseEntries$"
+            [paginationConfig]="(currentPagination$ |async)"
+            [sortConfig]="(currentSort$ |async)"
+            [type]="startsWithType"
+            [startsWithOptions]="startsWithOptions"
+            (prev)="goPrev()"
+            (next)="goNext()">
+          </ds-browse-by>
+        }
       }
       @if (loading$ | async) {
-        <ds-loading
-        message="{{'loading.browse-by-page' | translate}}"></ds-loading>
+        @if (value) {
+          <ds-loading
+          message="{{'loading.browse-by-page' | translate}}"></ds-loading>
+        }
       }
     </div>
   </section>

@@ -5,24 +5,23 @@
   @if (communitiesRD?.hasFailed) {
     <ds-error message="{{'error.top-level-communities' | translate}}"></ds-error>
   }
-  @if (communitiesRD?.hasSucceeded && categories.length > 0) {
+  @if (communitiesRD?.hasSucceeded && communities.length > 0) {
     <section class="categories-section enap-section">
       <h2 class="enap-section-title">Comunidades</h2>
       <div class="categories-grid">
-        @for (category of categories; track category.name) {
-          <a class="category-card" [routerLink]="['/community-list']">
+        @for (community of communities; track community.id) {
+          <a class="category-card" [routerLink]="['/communities', community.id]">
             <div class="category-icon">
-              <i [class]="category.icon"></i>
+              <i class="fas fa-university"></i>
             </div>
-            <h3 class="category-name">{{ category.name }}</h3>
-            <p class="category-description">{{ category.description }}</p>
+            <h3 class="category-name">{{ community.name }}</h3>
+            @if (community.shortDescription) {
+              <p class="category-description">{{ community.shortDescription }}</p>
+            }
             <div class="category-meta">
               <span class="category-badge">
                 <i class="fas fa-file-alt me-1"></i>
-                {{ category.totalItems | number }} itens
-              </span>
-              <span class="category-count">
-                {{ category.communities.length }} comunidades
+                {{ community.archivedItemsCount | number }} itens
               </span>
             </div>
           </a>

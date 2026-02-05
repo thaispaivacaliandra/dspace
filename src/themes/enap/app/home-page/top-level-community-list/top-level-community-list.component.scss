@@ -9,10 +9,10 @@
   flex-direction: column;
   background: #fff;
   border-radius: var(--enap-card-radius, 16px);
+  border: 1px solid #C8D1E0;
   padding: 2rem 1.5rem;
   text-decoration: none;
   color: inherit;
-  box-shadow: var(--enap-shadow, 0 4px 24px rgba(0, 0, 0, 0.08));
   transition: transform var(--enap-transition, 0.3s ease), box-shadow var(--enap-transition, 0.3s ease);
 
   &:hover {

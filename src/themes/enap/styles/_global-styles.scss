@@ -3,22 +3,58 @@
 // imports the base global style
 @import '../../../styles/_global-styles.scss';
 
+// ── Search filter cards ──
 .facet-filter, .setting-option, .advanced-search {
-  background-color: var(--bs-light);
-  border-radius: var(--bs-border-radius);
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  transition: box-shadow var(--enap-transition, 0.3s ease);
 
   &.p-3 {
-    // Needs !important because the original bootstrap class uses it
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
+    padding: 0 !important;
+  }
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  // Filter category header button
+  .filter-name {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid transparent;
+    transition: background-color var(--enap-transition, 0.3s ease);
+    align-items: center;
+
+    &:hover {
+      background-color: #f0f4f5;
+    }
+
+    .h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--enap-primary, #024248);
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .filter-toggle {
+      color: var(--enap-accent, #007D7A);
+      font-size: 0.8rem;
+    }
+  }
+
+  // When expanded, show border under header
+  .filter-name[aria-expanded="true"] {
+    border-bottom-color: #e5e7eb;
+  }
+
+  // Collapsible content area
+  .search-filter-wrapper {
+    padding: 0.5rem 1rem 0.75rem;
   }
 
   .bg-secondary {
-    background-color: var(--bs-primary);
-  }
-
-  h4, .h4 {
-    font-size: 1.1rem
+    background-color: var(--enap-accent, #007D7A) !important;
   }
 }
 
@@ -140,6 +176,13 @@ ds-themed-search {
     border-bottom: 2px solid var(--enap-accent, #007D7A);
   }
 
+  // Sidebar panel background
+  .sidebar-content {
+    background-color: #F5F7FA;
+    border-radius: var(--enap-card-radius, 16px);
+    padding: 1.25rem 1rem;
+  }
+
   .sidebar-search-result-filters,
   .search-filters {
     .filter-label {
@@ -150,22 +193,21 @@ ds-themed-search {
 
   .pagination {
     .page-link {
-      color: var(--enap-primary, #024248);
-      border-radius: 8px;
+      color: var(--enap-accent, #007D7A);
+      border-radius: 32px;
       margin: 0 2px;
-      border-color: #e5e7eb;
 
       &:hover {
-        background-color: var(--enap-accent, #007D7A);
-        color: white;
-        border-color: var(--enap-accent, #007D7A);
+        background-color: #EBEFF5;
+        color: #007D7A;
       }
     }
 
     .page-item.active .page-link {
-      background-color: var(--enap-primary, #024248);
-      border-color: var(--enap-primary, #024248);
+      background-color: #025257;
+      border-color: #025257;
       color: white;
+      border-radius: 32px;
     }
   }
 }
@@ -203,6 +245,116 @@ ds-comcol-page-browse-by {
   }
 }
 
+// ── Search filter heading ("Filtros") ──
+ds-search-filters,
+ds-themed-search-filters {
+  > h2,
+  > h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--enap-primary, #024248);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-bottom: 0.65rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 2px solid var(--enap-accent, #007D7A);
+  }
+
+  // Reset filters button
+  > .btn-primary {
+    background-color: var(--enap-accent, #007D7A);
+    border-color: var(--enap-accent, #007D7A);
+    border-radius: var(--enap-btn-radius, 40px);
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all var(--enap-transition, 0.3s ease);
+    margin-top: 0.5rem;
+
+    &:hover {
+      background-color: var(--enap-primary, #024248);
+      border-color: var(--enap-primary, #024248);
+    }
+  }
+}
+
+// ── Facet option rows (checkboxes) ──
+ds-search-facet-option,
+ds-search-facet-selected-option {
+  display: block;
+
+  a {
+    padding: 0.35rem 0.25rem;
+    border-radius: 6px;
+    color: var(--bs-body-color);
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: #f0f4f5;
+    }
+
+    label {
+      cursor: pointer;
+      gap: 0.5rem;
+      align-items: flex-start;
+
+      .filter-checkbox {
+        accent-color: var(--enap-accent, #007D7A);
+        width: 16px;
+        height: 16px;
+        margin-top: 3px;
+        flex-shrink: 0;
+        cursor: pointer;
+      }
+
+      .break-facet,
+      .filter-value {
+        font-size: 0.875rem;
+        color: #374151;
+        line-height: 1.5;
+      }
+
+      // Count badge
+      .badge.bg-secondary.rounded-pill {
+        background-color: rgba(0, 125, 122, 0.12) !important;
+        color: var(--enap-primary, #024248);
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 0.2em 0.55em;
+      }
+    }
+  }
+}
+
+// Selected filter option - bold text
+ds-search-facet-selected-option a label {
+  .filter-value {
+    font-weight: 600;
+    color: var(--enap-primary, #024248);
+  }
+}
+
+// ── Show more / Show less links ──
+.toggle-more-filters {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #f0f0f0;
+
+  a {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--enap-accent, #007D7A) !important;
+    text-decoration: none !important;
+
+    &:hover {
+      text-decoration: underline !important;
+      color: var(--enap-primary, #024248) !important;
+    }
+  }
+}
+
+// ── Responsive ──
 @media (max-width: 768px) {
   .community-page,
   .collection-page {
@@ -212,6 +364,55 @@ ds-comcol-page-browse-by {
       h1, .h1 {
         font-size: 1.4rem;
       }
+    }
+  }
+}
+
+// ── Search page mobile ──
+@media (max-width: 767.98px) {
+  ds-search,
+  ds-themed-search {
+    // "Open filters" button
+    .open-sidebar {
+      background-color: var(--enap-accent, #007D7A);
+      border-color: var(--enap-accent, #007D7A);
+      color: white;
+      border-radius: var(--enap-btn-radius, 40px);
+      padding: 0.5rem 1.25rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+
+      &:hover {
+        background-color: var(--enap-primary, #024248);
+        border-color: var(--enap-primary, #024248);
+      }
+
+      i {
+        margin-right: 0.35rem;
+      }
+    }
+  }
+
+  // Mobile sidebar header
+  #sidebar-options {
+    background-color: var(--enap-primary, #024248);
+    padding: 0.75rem 1rem;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 1rem;
+
+    .results {
+      color: white;
+      font-weight: 600;
+    }
+
+    .close-sidebar {
+      background-color: white;
+      border-color: white;
+      color: var(--enap-primary, #024248);
+      border-radius: var(--enap-btn-radius, 40px);
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 0.35rem 1rem;
     }
   }
 }

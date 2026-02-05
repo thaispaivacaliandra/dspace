@@ -21,15 +21,6 @@ import { ErrorComponent } from '../../../../../app/shared/error/error.component'
 import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
 import { VarDirective } from '../../../../../app/shared/utils/var.directive';
 
-interface CommunityCategory {
-  name: string;
-  icon: string;
-  description: string;
-  keywords: string[];
-  communities: Community[];
-  totalItems: number;
-}
-
 @Component({
   selector: 'ds-themed-top-level-community-list',
   templateUrl: './top-level-community-list.component.html',
@@ -48,40 +39,7 @@ export class TopLevelCommunityListComponent extends BaseComponent implements OnI
   private linkService = inject(LinkService);
   private logoSubscription: Subscription;
 
-  categories: CommunityCategory[] = [];
-
-  private categoryDefinitions = [
-    {
-      name: 'Formação e Ensino',
-      icon: 'fas fa-graduation-cap',
-      description: 'Cursos, especializações, mestrado e escola virtual',
-      keywords: ['curso', 'escola virtual', 'especialização', 'mestrado', 'formação', 'aperfeiçoamento', 'desenvolvimento profissional', 'educação executiva'],
-    },
-    {
-      name: 'Pesquisa e Publicações',
-      icon: 'fas fa-book-open',
-      description: 'Produção acadêmica, publicações e revista do serviço público',
-      keywords: ['produção acadêmica', 'publicações', 'revista', 'gestão pública', 'finanças públicas'],
-    },
-    {
-      name: 'Inovação e Premiações',
-      icon: 'fas fa-lightbulb',
-      description: 'Concursos de inovação, casoteca e ODS',
-      keywords: ['inovação', 'concurso', 'casoteca', 'ods', 'premiações'],
-    },
-    {
-      name: 'Eventos',
-      icon: 'fas fa-calendar-alt',
-      description: 'Eventos nacionais e internacionais',
-      keywords: ['evento'],
-    },
-    {
-      name: 'Institucional',
-      icon: 'fas fa-landmark',
-      description: 'Memória, acesso à informação e rede de escolas',
-      keywords: ['memória', 'acesso à informação', 'rede', 'história', 'eppgg'],
-    },
-  ];
+  communities: Community[] = [];
 
   override ngOnInit() {
     super.ngOnInit();
@@ -92,41 +50,9 @@ export class TopLevelCommunityListComponent extends BaseComponent implements OnI
             this.linkService.resolveLink<Community>(community, followLink('logo'));
           }
         });
-        this.buildCategories(rd.payload.page);
+        this.communities = rd.payload.page;
       }
     });
-  }
-
-  private buildCategories(communities: Community[]): void {
-    const assigned = new Set<string>();
-
-    this.categories = this.categoryDefinitions.map(def => {
-      const matched = communities.filter(c => {
-        const name = c.name?.toLowerCase() || '';
-        return def.keywords.some(kw => name.includes(kw));
-      });
-
-      matched.forEach(c => assigned.add(c.id));
-
-      return {
-        ...def,
-        communities: matched,
-        totalItems: matched.reduce((sum, c) => sum + (c.archivedItemsCount || 0), 0),
-      };
-    });
-
-    // Catch unmatched communities under "Outros"
-    const unmatched = communities.filter(c => !assigned.has(c.id));
-    if (unmatched.length > 0) {
-      this.categories.push({
-        name: 'Outros',
-        icon: 'fas fa-folder-open',
-        description: 'Outras comunidades do repositório',
-        keywords: [],
-        communities: unmatched,
-        totalItems: unmatched.reduce((sum, c) => sum + (c.archivedItemsCount || 0), 0),
-      });
-    }
   }
 
   override ngOnDestroy() {

@@ -21,6 +21,7 @@ import { RecentItemListComponent } from './app/home-page/recent-item-list/recent
 import { StatsSectionComponent } from './app/home-page/stats-section/stats-section.component';
 import { TopLevelCommunityListComponent } from './app/home-page/top-level-community-list/top-level-community-list.component';
 import { NavbarComponent } from './app/navbar/navbar.component';
+import { SearchNavbarComponent } from './app/search-navbar/search-navbar.component';
 import { ItemSearchResultListElementComponent } from './app/shared/object-list/search-result-list-element/item-search-result/item-types/item/item-search-result-list-element.component';
 
 /**
@@ -47,6 +48,7 @@ const DECLARATIONS = [
   HeaderComponent,
   HeaderNavbarWrapperComponent,
   NavbarComponent,
+  SearchNavbarComponent,
 ];
 
 // Register ENAP browse-by components in the browse-by decorator map

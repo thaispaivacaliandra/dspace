@@ -1,24 +1,140 @@
+// ── ENAP Browse by Metadata – Community List Style ──
+
+$enap-primary: var(--enap-primary, #024248);
+$enap-accent: var(--enap-accent, #007D7A);
+$enap-card-radius: var(--enap-card-radius, 16px);
+$enap-shadow: var(--enap-shadow, 0 4px 24px rgba(0, 0, 0, 0.08));
+$enap-shadow-hover: var(--enap-shadow-hover, 0 12px 32px rgba(0, 0, 0, 0.14));
+$enap-transition: var(--enap-transition, 0.3s ease);
+
 .enap-browse-page {
   background: white;
   min-height: 60vh;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .enap-browse-container {
   max-width: 1142px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 0 1rem;
 }
 
-:host ::ng-deep {
-  h1 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--enap-primary, #024248);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--enap-accent, #007D7A);
+// ── Header ──
+.enap-browse-header {
+  margin-bottom: 2.5rem;
+}
+
+// ── Entries tree (card list) ──
+.enap-entries-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+// ── Entry node ──
+.enap-entry-node {
+  display: block;
+}
+
+// ── Node card ──
+.enap-node-card {
+  background: #fff;
+  border-radius: $enap-card-radius;
+  padding: 1.25rem 1.5rem;
+  box-shadow: $enap-shadow;
+  transition: transform $enap-transition, box-shadow $enap-transition;
+  border: 1px solid transparent;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $enap-shadow-hover;
+  }
+}
+
+// ── Node content row ──
+.enap-node-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+// ── Node icon ──
+.enap-node-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 10px;
+  background: rgba(0, 125, 122, 0.08);
+  color: $enap-accent;
+  font-size: 1.1rem;
+  transition: background $enap-transition, color $enap-transition;
+}
+
+.enap-node-card:hover .enap-node-icon {
+  background: rgba(0, 125, 122, 0.14);
+}
+
+// ── Node info ──
+.enap-node-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+// ── Node name (link) ──
+.enap-node-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $enap-primary;
+  text-decoration: none;
+  transition: color $enap-transition;
+
+  &:hover {
+    color: $enap-accent;
+    text-decoration: none;
   }
 
+  &:focus-visible {
+    outline: 3px solid $enap-accent;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+// ── Item count badge ──
+.enap-item-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.7rem;
+  background: rgba(0, 125, 122, 0.08);
+  color: $enap-accent;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+
+// ── Section title (shared with community list) ──
+:host ::ng-deep {
+  .enap-section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $enap-primary;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid $enap-accent;
+    text-align: center;
+  }
+
+  // ── Full browse mode overrides ──
   .list-group {
     border: none;
     border-radius: 0;
@@ -28,30 +144,14 @@
   .list-group-item {
     border: none;
     border-radius: 0;
-    padding: 0.65rem 0;
+    padding: 0;
     background: transparent;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: var(--enap-bg-light, #f8fafa);
-    }
-
-    a {
-      color: var(--enap-primary, #024248);
-      text-decoration: none;
-      font-weight: 500;
-
-      &:hover {
-        color: var(--enap-accent, #007D7A);
-      }
-    }
   }
 
   ds-starts-with-text,
   .starts-with {
     background: var(--enap-bg-light, #f8fafa);
-    border-radius: var(--enap-card-radius, 16px);
+    border-radius: $enap-card-radius;
     padding: 1rem 1.5rem;
     margin-bottom: 1.5rem;
 
@@ -64,8 +164,8 @@
 
       &.active,
       &:hover {
-        background-color: var(--enap-accent, #007D7A);
-        border-color: var(--enap-accent, #007D7A);
+        background-color: $enap-accent;
+        border-color: $enap-accent;
         color: white;
       }
     }
@@ -73,38 +173,37 @@
 
   .pagination {
     .page-link {
-      color: var(--enap-primary, #024248);
-      border-radius: 8px;
+      color: var(--enap-accent, #007D7A);
+      border-radius: 32px;
       margin: 0 2px;
-      border-color: #e5e7eb;
 
       &:hover {
-        background-color: var(--enap-accent, #007D7A);
-        color: white;
-        border-color: var(--enap-accent, #007D7A);
+        background-color: #EBEFF5;
+        color: #007D7A;
       }
     }
 
     .page-item.active .page-link {
-      background-color: var(--enap-primary, #024248);
-      border-color: var(--enap-primary, #024248);
+      background-color: #025257;
+      border-color: #025257;
       color: white;
+      border-radius: 32px;
     }
   }
 
   .reset .btn {
-    color: var(--enap-primary, #024248);
-    border-color: var(--enap-primary, #024248);
-    border-radius: var(--enap-btn-radius, 40px);
+    color: $enap-primary;
+    border-color: $enap-primary;
+    border-radius: 40px;
 
     &:hover {
-      background-color: var(--enap-primary, #024248);
+      background-color: $enap-primary;
       color: white;
     }
   }
 
   .badge {
-    background-color: var(--enap-accent, #007D7A);
+    background-color: $enap-accent;
     color: white;
     border-radius: 12px;
     padding: 0.25rem 0.6rem;
@@ -113,14 +212,59 @@
   }
 }
 
+// ── Responsive ──
 @media (max-width: 768px) {
-  .enap-browse-container {
-    padding: 1.5rem 0.75rem;
+  .enap-browse-page {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
-  :host ::ng-deep {
-    h1 {
-      font-size: 1.4rem;
-    }
+  .enap-browse-container {
+    padding: 0 0.75rem;
+  }
+
+  .enap-node-card {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .enap-node-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 1rem;
+  }
+
+  .enap-node-name {
+    font-size: 1rem;
+  }
+
+  .enap-item-badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  :host ::ng-deep .enap-section-title {
+    font-size: 1.4rem;
+  }
+
+}
+
+@media (max-width: 576px) {
+  .enap-node-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .enap-node-content {
+    gap: 0.5rem;
+  }
+
+  .enap-node-info {
+    flex-wrap: wrap;
+    gap: 0.4rem;
   }
 }

@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { BrowseByTitleComponent as BaseComponent } from '../../../../../app/browse-by/browse-by-title/browse-by-title.component';
@@ -17,5 +17,9 @@ import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed
     TranslateModule,
   ],
 })
-export class BrowseByTitleComponent extends BaseComponent {
+export class BrowseByTitleComponent extends BaseComponent implements OnInit {
+  override ngOnInit(): void {
+    this.fetchThumbnails = false;
+    super.ngOnInit();
+  }
 }

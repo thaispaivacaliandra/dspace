@@ -1,394 +1,61 @@
-// === Item Type Badges ===
-.item-badge {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: capitalize;
-  margin-bottom: 8px;
-  letter-spacing: 0.02em;
-}
-
-.item-badge-sm {
-  padding: 3px 10px;
-  font-size: 0.7rem;
-}
-
-// === Magazine Layout (Desktop) ===
-.magazine-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.magazine-featured {
-  display: block;
-  position: relative;
-  border-radius: var(--enap-card-radius, 16px);
-  overflow: hidden;
-  box-shadow: var(--enap-shadow, 0 4px 24px rgba(0, 0, 0, 0.08));
-  transition: transform var(--enap-transition, 0.3s ease), box-shadow var(--enap-transition, 0.3s ease);
-  text-decoration: none;
-  color: inherit;
-  max-height: 420px;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--enap-shadow-hover, 0 12px 32px rgba(0, 0, 0, 0.14));
-
-    ::ng-deep img {
-      transform: scale(1.03);
-    }
-  }
-}
-
-.magazine-featured-image {
-  width: 100%;
-  height: 420px;
-  overflow: hidden;
-  position: relative;
-
-  ::ng-deep {
-    ds-thumbnail,
-    ds-base-thumbnail {
-      width: 100%;
-      height: 100%;
-      display: flex;
-
-      .thumbnail {
-        width: 100%;
-        height: 100%;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.4s ease;
-      }
-
-      .thumbnail-content.outer {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #024248 0%, #007D7A 100%);
-      }
-    }
-  }
-}
-
-.magazine-featured-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(1, 33, 36, 0.85));
-  padding: 60px 32px 32px;
-  color: white;
-}
-
-.magazine-featured-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  line-height: 1.3;
-  color: white;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.magazine-featured-author {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.85);
-  margin: 0 0 8px;
-
-  i {
-    margin-right: 6px;
-    font-size: 0.8rem;
-  }
-}
-
-.magazine-featured-text {
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.5;
-  margin: 0 0 8px;
-  font-size: 0.95rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.magazine-featured-date {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.7);
-
-  i {
-    margin-right: 5px;
-  }
-}
-
-// === Secondary Grid (3 cards) ===
-.magazine-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.magazine-card {
+// === Recent Submissions — plain list ===
+.recent-row {
   display: flex;
-  flex-direction: column;
-  background: white;
-  border-radius: var(--enap-card-radius, 16px);
-  overflow: hidden;
-  box-shadow: var(--enap-shadow, 0 4px 24px rgba(0, 0, 0, 0.08));
-  transition: transform var(--enap-transition, 0.3s ease), box-shadow var(--enap-transition, 0.3s ease);
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #ddd;
   text-decoration: none;
   color: inherit;
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--enap-shadow-hover, 0 12px 32px rgba(0, 0, 0, 0.14));
-
-    .magazine-card-title {
-      color: var(--enap-accent, #007D7A);
-    }
-
-    ::ng-deep img {
-      transform: scale(1.05);
-    }
-  }
-}
-
-.magazine-card-image {
-  height: 180px;
-  overflow: hidden;
-
-  ::ng-deep {
-    ds-thumbnail,
-    ds-base-thumbnail {
-      width: 100%;
-      height: 100%;
-      display: flex;
-
-      .thumbnail {
-        width: 100%;
-        height: 100%;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-      }
-
-      .thumbnail-content.outer {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #024248 0%, #007D7A 100%);
-      }
-    }
-  }
-}
-
-.magazine-card-content {
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.magazine-card-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 8px;
-  line-height: 1.4;
-  color: var(--enap-primary, #024248);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  transition: color var(--enap-transition, 0.3s ease);
-}
-
-.magazine-card-author {
-  font-size: 0.85rem;
-  color: #666;
-  margin: 0 0 6px;
-
-  i {
-    margin-right: 5px;
-    font-size: 0.75rem;
+  &:hover .recent-row-title {
     color: var(--enap-accent, #007D7A);
   }
 }
 
-.magazine-card-date {
-  font-size: 0.8rem;
-  color: #999;
-  margin-top: auto;
-
-  i {
-    margin-right: 5px;
-  }
+.recent-row-main {
+  min-width: 0;
+  flex: 1;
 }
 
-// === Mobile Carousel ===
-.news-carousel-container {
-  position: relative;
-  margin-bottom: 40px;
-}
-
-.news-carousel {
-  overflow: hidden;
-  margin-bottom: 20px;
-  padding: 0;
-  height: 50vh;
-  min-height: 300px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.news-carousel-track {
-  display: flex;
-  height: 100%;
-  -webkit-transform: translateX(0);
-}
-
-.news-carousel-slide {
-  flex: 0 0 70vw;
-  position: relative;
-  margin-right: 4vw;
-  height: 100%;
-}
-
-.news-carousel-link {
+.recent-row-title {
   display: block;
-  position: relative;
-  text-decoration: none;
-  color: inherit;
-  height: 100%;
-}
-
-.news-carousel-image {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-  border-radius: var(--enap-card-radius, 16px);
-  box-shadow: var(--enap-shadow, 0 4px 24px rgba(0, 0, 0, 0.08));
-
-  ::ng-deep {
-    ds-thumbnail,
-    ds-base-thumbnail {
-      width: 100%;
-      height: 100%;
-      display: flex;
-
-      .thumbnail {
-        width: 100%;
-        height: 100%;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .thumbnail-content.outer {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #024248 0%, #007D7A 100%);
-      }
-    }
-  }
-}
-
-.news-carousel-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(1, 33, 36, 0.85));
-  padding: 30px 20px 20px;
-  color: white;
-}
-
-.news-carousel-title {
-  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 6px;
-  line-height: 1.3;
-  color: white;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  color: var(--enap-primary, #024248);
+  transition: color 0.2s ease;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.news-carousel-author {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0;
-
-  i {
-    margin-right: 5px;
-    font-size: 0.75rem;
-  }
+.recent-row-author {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.news-carousel-date {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 8px;
-
-  i {
-    margin-right: 5px;
-  }
-}
-
-// === Indicators ===
-.carousel-indicators {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 15px;
-}
-
-.carousel-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0, 125, 122, 0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 0;
-  -webkit-appearance: none;
-
-  &.active {
-    background: var(--enap-accent, #007D7A);
-    transform: scale(1.2);
-  }
+.recent-row-date {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  color: #888;
 }
 
 // === Button ===
-.news-actions {
+.recent-actions {
   text-align: center;
   margin-top: 1.5rem;
 }
 
-.btn-todos {
+.btn-ver-todas {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 44px;
-  text-decoration: none;
   color: var(--enap-accent, #007D7A);
   border: 2px solid var(--enap-accent, #007D7A);
   padding: 8px 32px;
@@ -397,77 +64,28 @@
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all var(--enap-transition, 0.3s ease);
-  -webkit-appearance: none;
+  transition: all 0.3s ease;
 
   &:hover {
     color: white;
     background-color: var(--enap-accent, #007D7A);
-    border-color: var(--enap-accent, #007D7A);
-  }
-
-  &:active {
-    background-color: #006969;
-    border-color: #006969;
   }
 }
 
-// === Responsive ===
-.mobile-only {
-  display: none;
-}
-
-.desktop-only {
-  display: grid;
-}
-
-@media (max-width: 992px) {
-  .magazine-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
+// === Mobile ===
 @media (max-width: 768px) {
-  .mobile-only {
-    display: block;
-  }
-
-  .desktop-only {
-    display: none;
-  }
-
-  .news-carousel-container {
-    height: 55vh;
-    min-height: 320px;
-  }
-
-  .news-carousel {
-    height: 100%;
-  }
-
-  .news-carousel-slide {
-    flex: 0 0 75vw;
-  }
-
-  .news-carousel-title {
-    font-size: 16px;
+  .recent-row-title {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
 @media (max-width: 480px) {
-  .news-carousel-slide {
-    flex: 0 0 85vw;
-  }
-
-  .news-carousel-container {
-    height: 45vh;
-    min-height: 280px;
-  }
-}
-
-// === Safari Fixes ===
-@supports (-webkit-touch-callout: none) {
-  .news-carousel {
-    height: -webkit-fill-available;
+  .recent-row {
+    flex-direction: column;
+    gap: 0.25rem;
   }
 }

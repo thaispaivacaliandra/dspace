@@ -57,22 +57,21 @@
 
   .pagination {
     .page-link {
-      color: var(--enap-primary, #024248);
-      border-radius: 8px;
+      color: var(--enap-accent, #007D7A);
+      border-radius: 32px;
       margin: 0 2px;
-      border-color: #e5e7eb;
 
       &:hover {
-        background-color: var(--enap-accent, #007D7A);
-        color: white;
-        border-color: var(--enap-accent, #007D7A);
+        background-color: #EBEFF5;
+        color: #007D7A;
       }
     }
 
     .page-item.active .page-link {
-      background-color: var(--enap-primary, #024248);
-      border-color: var(--enap-primary, #024248);
+      background-color: #025257;
+      border-color: #025257;
       color: white;
+      border-radius: 32px;
     }
   }
 
@@ -85,6 +84,23 @@
       background-color: var(--enap-primary, #024248);
       color: white;
     }
+  }
+
+  // Hide item thumbnails on title browse page
+  ds-thumbnail,
+  ds-themed-thumbnail {
+    display: none !important;
+  }
+
+  // Ensure item content takes full width (no thumbnail column)
+  ds-item-search-result-list-element .row > .col-9,
+  ds-item-search-result-list-element .row > .col-md-12 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  ds-item-search-result-list-element .row > .col-3.col-md-2 {
+    display: none !important;
   }
 }
 

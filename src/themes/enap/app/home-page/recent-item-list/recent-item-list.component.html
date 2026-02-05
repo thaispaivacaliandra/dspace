@@ -1,131 +1,24 @@
 <ng-container *ngVar="(itemRD$ | async) as itemRD">
   @if (itemRD?.hasSucceeded && itemRD?.payload?.page.length > 0) {
-    <section class="news-section enap-section">
+    <section class="recent-submissions-section enap-section">
       <h2 class="enap-section-title">{{ 'home.recent-submissions.head' | translate }}</h2>
 
-      <!-- Desktop: Magazine Layout (1 featured + 3 grid) -->
-      <div class="magazine-layout desktop-only">
-        <!-- Featured item -->
-        <a class="magazine-featured" [routerLink]="[getItemRoute(itemRD.payload.page[0])]"
-           [title]="itemRD.payload.page[0].name">
-          <div class="magazine-featured-image">
-            <ds-thumbnail
-              [thumbnail]="itemRD.payload.page[0]?.thumbnail | async"
-              [limitWidth]="false">
-            </ds-thumbnail>
-            <div class="magazine-featured-overlay">
-              @if (getItemType(itemRD.payload.page[0]); as itemType) {
-                <span class="item-badge" [style.background]="getBadgeColor(itemType)">
-                  {{ itemType }}
-                </span>
-              }
-              <h3 class="magazine-featured-title">{{ itemRD.payload.page[0].name }}</h3>
-              @if (getItemAuthor(itemRD.payload.page[0]); as author) {
-                <p class="magazine-featured-author">
-                  <i class="fas fa-user"></i> {{ author }}
-                </p>
-              }
-              @if (itemRD.payload.page[0].firstMetadataValue('dc.description.abstract'); as abstract) {
-                <p class="magazine-featured-text">{{ abstract }}</p>
-              }
-              @if (itemRD.payload.page[0].firstMetadataValue('dc.date.issued'); as dateIssued) {
-                <div class="magazine-featured-date">
-                  <i class="fas fa-calendar"></i> {{ dateIssued }}
-                </div>
-              }
-            </div>
-          </div>
-        </a>
-
-        <!-- Secondary grid (3 items) -->
-        <div class="magazine-grid">
-          @for (item of getSecondaryItems(itemRD.payload.page); track item) {
-            <a class="magazine-card" [routerLink]="[getItemRoute(item)]" [title]="item.name">
-              <div class="magazine-card-image">
-                <ds-thumbnail
-                  [thumbnail]="item?.thumbnail | async"
-                  [limitWidth]="false">
-                </ds-thumbnail>
-              </div>
-              <div class="magazine-card-content">
-                @if (getItemType(item); as itemType) {
-                  <span class="item-badge item-badge-sm" [style.background]="getBadgeColor(itemType)">
-                    {{ itemType }}
-                  </span>
-                }
-                <h4 class="magazine-card-title">{{ item.name }}</h4>
-                @if (getItemAuthor(item); as author) {
-                  <p class="magazine-card-author">
-                    <i class="fas fa-user"></i> {{ author }}
-                  </p>
-                }
-                @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
-                  <div class="magazine-card-date">
-                    <i class="fas fa-calendar"></i> {{ dateIssued }}
-                  </div>
-                }
-              </div>
-            </a>
-          }
-        </div>
-      </div>
-
-      <!-- Mobile: Carousel -->
-      <div class="news-carousel-container mobile-only">
-        <div class="news-carousel">
-          <div class="news-carousel-track"
-               [style.transform]="'translateX(' + carouselTranslate + 'vw)'"
-               [style.transition]="carouselTransition"
-               (touchstart)="onTouchStart($event)"
-               (touchmove)="onTouchMove($event)"
-               (touchend)="onTouchEnd()">
-            @for (item of $any(itemRD.payload.page); track item) {
-              <div class="news-carousel-slide">
-                <a [routerLink]="[getItemRoute(item)]" class="news-carousel-link" [title]="item.name">
-                  <div class="news-carousel-image">
-                    <ds-thumbnail
-                      [thumbnail]="item?.thumbnail | async"
-                      [limitWidth]="false">
-                    </ds-thumbnail>
-                    <div class="news-carousel-overlay">
-                      @if (getItemType(item); as itemType) {
-                        <span class="item-badge item-badge-sm" [style.background]="getBadgeColor(itemType)">
-                          {{ itemType }}
-                        </span>
-                      }
-                      @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
-                        <div class="news-carousel-date">
-                          <i class="fas fa-calendar"></i> {{ dateIssued }}
-                        </div>
-                      }
-                      <h3 class="news-carousel-title">{{ item.name }}</h3>
-                      @if (getItemAuthor(item); as author) {
-                        <p class="news-carousel-author">
-                          <i class="fas fa-user"></i> {{ author }}
-                        </p>
-                      }
-                    </div>
-                  </div>
-                </a>
-              </div>
+      @for (item of itemRD.payload.page; track item) {
+        <a class="recent-row" [routerLink]="[getItemRoute(item)]">
+          <div class="recent-row-main">
+            <span class="recent-row-title">{{ item.name }}</span>
+            @if (getItemAuthor(item); as author) {
+              <span class="recent-row-author">{{ author }}</span>
             }
           </div>
-        </div>
-
-        <!-- Indicators -->
-        <div class="carousel-indicators">
-          @for (item of $any(itemRD.payload.page); track item; let i = $index) {
-            <button class="carousel-indicator"
-                    [class.active]="i === currentSlide"
-                    (click)="goToSlide(i)"
-                    [attr.aria-label]="'Ir para item ' + (i + 1)">
-            </button>
+          @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
+            <span class="recent-row-date">{{ dateIssued }}</span>
           }
-        </div>
-      </div>
+        </a>
+      }
 
-      <div class="news-actions">
-        <button (click)="onLoadMore()" class="btn-todos" role="link" tabindex="0">
+      <div class="recent-actions">
+        <button (click)="onLoadMore()" class="btn-ver-todas" role="link" tabindex="0">
           Ver todas as publicações
         </button>
       </div>

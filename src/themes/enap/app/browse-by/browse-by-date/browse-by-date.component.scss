@@ -42,22 +42,21 @@
 
   .pagination {
     .page-link {
-      color: var(--enap-primary, #024248);
-      border-radius: 8px;
+      color: var(--enap-accent, #007D7A);
+      border-radius: 32px;
       margin: 0 2px;
-      border-color: #e5e7eb;
 
       &:hover {
-        background-color: var(--enap-accent, #007D7A);
-        color: white;
-        border-color: var(--enap-accent, #007D7A);
+        background-color: #EBEFF5;
+        color: #007D7A;
       }
     }
 
     .page-item.active .page-link {
-      background-color: var(--enap-primary, #024248);
-      border-color: var(--enap-primary, #024248);
+      background-color: #025257;
+      border-color: #025257;
       color: white;
+      border-radius: 32px;
     }
   }
 
@@ -67,8 +66,8 @@
     border-radius: var(--enap-btn-radius, 40px);
 
     &:hover {
-      background-color: var(--enap-primary, #024248);
-      color: white;
+      background-color: #EBEFF5;
+      color: #007D7A;
     }
   }
 }
