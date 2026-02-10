@@ -1,4 +1,21 @@
 <div id="header-navbar-wrapper"><!-- [class.open]="!(isNavBarCollapsed$ | async)" -->
+  <!-- Barra do Governo Federal -->
+  <div class="gov-bar">
+    <div class="gov-bar-content">
+      <div class="gov-bar-logo">
+        <img src="assets/images/govbr-logo-white.svg" alt="Logo Gov.BR" width="51" height="18">
+      </div>
+      <a href="https://www.gov.br/secom/pt-br/acesso-a-informacao/comunicabr" target="_blank" rel="noopener">Comunica BR</a>
+      <div class="gov-bar-separator"></div>
+      <a href="https://www.gov.br/acessoainformacao/pt-br" target="_blank" rel="noopener">Acesso à informação</a>
+      <div class="gov-bar-separator"></div>
+      <a href="https://www.gov.br/pt-br/participacao-social/" target="_blank" rel="noopener">Participe</a>
+      <div class="gov-bar-separator"></div>
+      <a href="https://www4.planalto.gov.br/legislacao/" target="_blank" rel="noopener">Legislação</a>
+      <div class="gov-bar-separator"></div>
+      <a href="https://www.gov.br/pt-br/orgaos-do-governo" target="_blank" rel="noopener">Órgãos do Governo</a>
+    </div>
+  </div>
   <ds-header></ds-header>
   <!-- Collapsible navbar (mobile only) -->
   @if ((isMobile$ | async)) {

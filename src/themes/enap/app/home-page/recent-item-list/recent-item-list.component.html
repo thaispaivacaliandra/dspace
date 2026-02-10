@@ -1,26 +1,57 @@
 <ng-container *ngVar="(itemRD$ | async) as itemRD">
   @if (itemRD?.hasSucceeded && itemRD?.payload?.page.length > 0) {
-    <section class="recent-submissions-section enap-section">
-      <h2 class="enap-section-title">{{ 'home.recent-submissions.head' | translate }}</h2>
+    <section class="recent-submissions-section">
+      <div class="recent-container">
+        <h2 class="enap-section-title">{{ 'home.recent-submissions.head' | translate }}</h2>
 
-      @for (item of itemRD.payload.page; track item) {
-        <a class="recent-row" [routerLink]="[getItemRoute(item)]">
-          <div class="recent-row-main">
-            <span class="recent-row-title">{{ item.name }}</span>
-            @if (getItemAuthor(item); as author) {
-              <span class="recent-row-author">{{ author }}</span>
-            }
+        <div class="carousel-wrapper">
+          <button class="carousel-arrow carousel-arrow--prev" (click)="prevSlide()" [disabled]="currentSlide === 0" aria-label="Anterior">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <div class="carousel-viewport" #carouselViewport>
+            <div class="carousel-track" [style.transform]="'translateX(-' + (currentSlide * slideWidth) + 'px)'">
+              @for (item of itemRD.payload.page; track item) {
+                <a class="recent-card" [routerLink]="[getItemRoute(item)]">
+                  @if (getItemType(item); as itemType) {
+                    <span class="recent-badge">
+                      {{ itemType }}
+                    </span>
+                  }
+                  <h3 class="recent-title">{{ item.name }}</h3>
+                  <div class="recent-meta">
+                    @if (getItemAuthor(item); as author) {
+                      <span class="recent-author">
+                        <i class="fas fa-user"></i> {{ author }}
+                      </span>
+                    }
+                    @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
+                      <span class="recent-date">
+                        <i class="fas fa-calendar-alt"></i> {{ dateIssued }}
+                      </span>
+                    }
+                  </div>
+                </a>
+              }
+            </div>
           </div>
-          @if (item.firstMetadataValue('dc.date.issued'); as dateIssued) {
-            <span class="recent-row-date">{{ dateIssued }}</span>
-          }
-        </a>
-      }
 
-      <div class="recent-actions">
-        <button (click)="onLoadMore()" class="btn-ver-todas" role="link" tabindex="0">
-          Ver todas as publicações
-        </button>
+          <button class="carousel-arrow carousel-arrow--next" (click)="nextSlide()" [disabled]="currentSlide >= maxSlide" aria-label="Próximo">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="carousel-dots">
+          @for (dot of getDots(); track dot) {
+            <button class="carousel-dot" [class.active]="dot === currentSlide" (click)="goToSlide(dot)" [attr.aria-label]="'Slide ' + (dot + 1)"></button>
+          }
+        </div>
+
+        <div class="recent-actions">
+          <button (click)="onLoadMore()" class="btn-ver-todas" role="link" tabindex="0">
+            Ver todas as publicações
+          </button>
+        </div>
       </div>
     </section>
   }

@@ -1,54 +1,194 @@
-// === Recent Submissions — plain list ===
-.recent-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid #ddd;
-  text-decoration: none;
-  color: inherit;
+// === Recent Submissions — Carousel ===
 
-  &:hover .recent-row-title {
-    color: var(--enap-accent, #007D7A);
-  }
+.recent-submissions-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 3rem 0;
+  width: 100%;
 }
 
-.recent-row-main {
-  min-width: 0;
+.recent-container {
+  max-width: 1142px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+// === Carousel ===
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.carousel-viewport {
+  overflow: hidden;
   flex: 1;
 }
 
-.recent-row-title {
-  display: block;
-  font-weight: 600;
-  color: var(--enap-primary, #024248);
-  transition: color 0.2s ease;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.carousel-track {
+  display: flex;
+  gap: 1.25rem;
+  transition: transform 0.4s ease;
 }
 
-.recent-row-author {
-  display: block;
-  font-size: 0.85rem;
-  color: #666;
-  margin-top: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.recent-row-date {
+.carousel-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #AFF0ED;
+  background: #024248;
+  color: #D6F9F8;
+  cursor: pointer;
   flex-shrink: 0;
-  font-size: 0.85rem;
-  color: #888;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background: #035b63;
+    border-color: #D6F9F8;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  i {
+    font-size: 0.85rem;
+  }
+}
+
+// === Dots ===
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #AFF0ED;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+
+  &.active {
+    background: #024248;
+    border-color: #024248;
+  }
+
+  &:hover:not(.active) {
+    background: rgba(2, 66, 72, 0.3);
+  }
+}
+
+// === Card ===
+.recent-card {
+  display: flex;
+  flex-direction: column;
+  background: #024248;
+  border: 1px solid #AFF0ED;
+  border-radius: var(--enap-card-radius, 16px);
+  padding: 1.5rem;
+  text-decoration: none;
+  color: #D6F9F8;
+  min-width: 280px;
+  max-width: 280px;
+  min-height: 220px;
+  flex-shrink: 0;
+  transition: transform var(--enap-transition, 0.3s ease),
+              box-shadow var(--enap-transition, 0.3s ease),
+              border-color var(--enap-transition, 0.3s ease);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border-color: #D6F9F8;
+
+    .recent-title {
+      color: #AFF0ED;
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid #AFF0ED;
+    outline-offset: 2px;
+  }
+}
+
+.recent-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 3px 12px;
+  border-radius: 20px;
+  border: 1px solid #AFF0ED;
+  color: #D6F9F8;
+  background: rgba(175, 240, 237, 0.15);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.recent-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #D6F9F8;
+  line-height: 1.4;
+  margin: 0 0 auto;
+  padding-bottom: 0.75rem;
+  transition: color 0.2s ease;
+
+  // Clamp to 3 lines
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.recent-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #AFF0ED;
+}
+
+.recent-author,
+.recent-date {
+  font-size: 0.8rem;
+  color: #D6F9F8;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  i {
+    color: #AFF0ED;
+    font-size: 0.7rem;
+    width: 14px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+}
+
+.recent-author {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 // === Button ===
 .recent-actions {
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .btn-ver-todas {
@@ -56,8 +196,8 @@
   align-items: center;
   justify-content: center;
   height: 44px;
-  color: var(--enap-accent, #007D7A);
-  border: 2px solid var(--enap-accent, #007D7A);
+  color: #024248;
+  border: 2px solid #024248;
   padding: 8px 32px;
   border-radius: var(--enap-btn-radius, 40px);
   background-color: white;
@@ -68,24 +208,27 @@
 
   &:hover {
     color: white;
-    background-color: var(--enap-accent, #007D7A);
+    background-color: #024248;
   }
 }
 
-// === Mobile ===
+// === Responsive ===
 @media (max-width: 768px) {
-  .recent-row-title {
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .recent-submissions-section {
+    padding: 2rem 0;
   }
-}
 
-@media (max-width: 480px) {
-  .recent-row {
-    flex-direction: column;
-    gap: 0.25rem;
+  .recent-card {
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .carousel-arrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .recent-title {
+    font-size: 1rem;
   }
 }

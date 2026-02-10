@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DSpaceObjectType } from '@dspace/core/shared/dspace-object-type.model';
 import { Item } from '@dspace/core/shared/item.model';
@@ -29,6 +29,21 @@ import { VarDirective } from '../../../../../app/shared/utils/var.directive';
 })
 export class RecentItemListComponent extends BaseComponent implements OnInit {
   private searchServiceLocal = inject(SearchService);
+
+  private viewportEl: ElementRef<HTMLElement> | undefined;
+
+  @ViewChild('carouselViewport')
+  set carouselViewport(ref: ElementRef<HTMLElement>) {
+    if (ref) {
+      this.viewportEl = ref;
+      setTimeout(() => this.calculateDimensions(), 0);
+    }
+  }
+
+  currentSlide = 0;
+  maxSlide = 0;
+  slideWidth = 300; // card width (280) + gap (20)
+  cardsPerView = 1;
 
   private badgeColors: Record<string, string> = {
     'artigo': '#007D7A',
@@ -69,6 +84,44 @@ export class RecentItemListComponent extends BaseComponent implements OnInit {
       }
     }
     return '#007D7A';
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.calculateDimensions();
+  }
+
+  private calculateDimensions(): void {
+    if (!this.viewportEl?.nativeElement) {
+      return;
+    }
+    const viewportWidth = this.viewportEl.nativeElement.offsetWidth;
+    this.cardsPerView = Math.max(1, Math.floor(viewportWidth / this.slideWidth));
+    const totalCards = this.paginationConfig.pageSize || 10;
+    this.maxSlide = Math.max(0, totalCards - this.cardsPerView);
+    if (this.currentSlide > this.maxSlide) {
+      this.currentSlide = this.maxSlide;
+    }
+  }
+
+  prevSlide(): void {
+    if (this.currentSlide > 0) {
+      this.currentSlide--;
+    }
+  }
+
+  nextSlide(): void {
+    if (this.currentSlide < this.maxSlide) {
+      this.currentSlide++;
+    }
+  }
+
+  goToSlide(index: number): void {
+    this.currentSlide = index;
+  }
+
+  getDots(): number[] {
+    return Array.from({ length: this.maxSlide + 1 }, (_, i) => i);
   }
 
   override ngOnInit(): void {

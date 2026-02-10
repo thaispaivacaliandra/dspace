@@ -3,6 +3,60 @@
   --ds-expandable-navbar-border-top-style: solid var(--ds-expandable-navbar-border-top-height) var(--ds-expandable-navbar-border-top-color);
   --ds-expandable-navbar-height: calc(100vh - var(--ds-header-height));
 
+  /* Barra do Governo Federal */
+  .gov-bar {
+    background-color: #071E41;
+    width: 100%;
+
+    .gov-bar-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+        gap: 8px;
+        padding: 6px 12px;
+      }
+    }
+
+    .gov-bar-logo {
+      display: flex;
+      align-items: center;
+      margin-right: 4px;
+
+      img {
+        width: 51px;
+        height: 18px;
+      }
+    }
+
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.75rem;
+      white-space: nowrap;
+
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
+    }
+
+    .gov-bar-separator {
+      width: 1px;
+      height: 14px;
+      background-color: rgba(255, 255, 255, 0.4);
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
+
   div#header-navbar-wrapper {
     // The header-navbar-wrapper should not have a z-index, otherwise it would cover the media viewer despite its higher z-index
     position: relative; // required by the mobile collapsible navbar
