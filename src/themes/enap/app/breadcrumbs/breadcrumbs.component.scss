@@ -1,0 +1,98 @@
+$enap-accent: var(--enap-accent, #007D7A);
+$enap-transition: var(--enap-transition, 0.3s ease);
+
+.enap-breadcrumb-nav {
+  background-color: var(--ds-breadcrumb-bg, #f8fafa);
+}
+
+.enap-breadcrumb {
+  border-radius: 0;
+  padding: 0.6rem calc(var(--bs-spacer, 1rem) * 0.75);
+  background-color: var(--ds-breadcrumb-bg, #f8fafa);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: auto;
+  max-width: 1130px;
+}
+
+// ── Separator ──
+.breadcrumb-item + .breadcrumb-item::before {
+  display: inline-block;
+  content: "›";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 14px;
+  color: #9ca3af;
+  padding: 0 0.5rem;
+  vertical-align: middle;
+}
+
+// ── Home icon ──
+.enap-breadcrumb-home {
+  a {
+    color: $enap-accent;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color $enap-transition;
+
+    &:hover {
+      color: var(--enap-primary, #024248);
+    }
+  }
+}
+
+// ── Intermediate links ──
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+
+  a {
+    color: $enap-accent;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color $enap-transition;
+
+    &:hover {
+      color: var(--enap-primary, #024248);
+      text-decoration: underline;
+    }
+  }
+}
+
+.breadcrumb-item-limiter {
+  display: inline-block;
+  max-width: var(--ds-breadcrumb-max-length, 200px);
+
+  > * {
+    max-width: 100%;
+    display: block;
+  }
+}
+
+// ── Active (current page) ──
+.enap-breadcrumb-active {
+  span {
+    color: #333840;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+}
+
+// ── Responsive ──
+@media (max-width: 576px) {
+  .enap-breadcrumb {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .breadcrumb-item a,
+  .enap-breadcrumb-active span {
+    font-size: 0.8rem;
+  }
+
+  .enap-breadcrumb-home a {
+    font-size: 0.9rem;
+  }
+}

@@ -1,15 +1,17 @@
-<section class="enap-browse-page">
+<section class="enap-browse-page enap-section">
   <div class="enap-browse-container">
     @if (displayTitle) {
-      <h1>
-        {{ ('browse.title') | translate:{
-        field: 'browse.metadata.' + vocabularyName | translate,
-        startsWith: '',
-        value: '',
-        } }}
-      </h1>
+      <div class="enap-browse-header">
+        <h1 class="enap-section-title">
+          {{ ('browse.title') | translate:{
+          field: 'browse.metadata.' + vocabularyName | translate,
+          startsWith: '',
+          value: '',
+          } }}
+        </h1>
+      </div>
     }
-    <div class="enap-treeview-wrapper mb-3">
+    <div class="enap-treeview-wrapper">
       <ds-vocabulary-treeview [description]="description"
         [vocabularyOptions]=vocabularyOptions
         [multiSelect]="true"
@@ -18,12 +20,15 @@
         (deselect)="onDeselect($event)">
       </ds-vocabulary-treeview>
     </div>
-    <a class="btn enap-browse-btn"
-      [routerLink]="['/search']"
-      [queryParams]="queryParams"
-      [queryParamsHandling]="'merge'"
-      role="link"
-      tabindex="0">
-    {{ 'browse.taxonomy.button' | translate }}</a>
+    <div class="enap-browse-actions">
+      <a class="btn enap-browse-btn"
+        [routerLink]="['/search']"
+        [queryParams]="queryParams"
+        [queryParamsHandling]="'merge'"
+        role="link"
+        tabindex="0">
+        <i class="fas fa-search me-2"></i>{{ 'browse.taxonomy.button' | translate }}
+      </a>
+    </div>
   </div>
 </section>

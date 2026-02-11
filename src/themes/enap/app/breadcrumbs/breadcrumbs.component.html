@@ -1,0 +1,40 @@
+<ng-container *ngVar="(breadcrumbs$ | async) as breadcrumbs">
+  @if ((showBreadcrumbs$ | async)) {
+    <nav aria-label="breadcrumb" class="enap-breadcrumb-nav">
+      <ol class="container enap-breadcrumb my-0">
+        <!-- Home icon link -->
+        <li class="breadcrumb-item enap-breadcrumb-home">
+          <a routerLink="/" aria-label="Início" role="link" tabindex="0">
+            <i class="fas fa-home"></i>
+          </a>
+        </li>
+        <!-- Intermediate breadcrumbs -->
+        @for (bc of breadcrumbs; track bc; let last = $last) {
+          @if (!last) {
+            <li class="breadcrumb-item">
+              <div class="breadcrumb-item-limiter">
+                <a [routerLink]="bc.url" class="text-truncate" [ngbTooltip]="bc.text | translate" placement="bottom" role="link" tabindex="0">
+                  {{ bc.text | translate }}
+                </a>
+              </div>
+            </li>
+          } @else {
+            <li class="breadcrumb-item enap-breadcrumb-active" aria-current="page">
+              <div class="breadcrumb-item-limiter">
+                <span class="text-truncate">{{ bc.text | translate }}</span>
+              </div>
+            </li>
+          }
+        }
+        <!-- If no breadcrumbs, home is the active page -->
+        @if (!breadcrumbs || breadcrumbs.length === 0) {
+          <li class="breadcrumb-item enap-breadcrumb-active" aria-current="page">
+            <div class="breadcrumb-item-limiter">
+              <span class="text-truncate">{{ 'home.breadcrumbs' | translate }}</span>
+            </div>
+          </li>
+        }
+      </ol>
+    </nav>
+  }
+</ng-container>

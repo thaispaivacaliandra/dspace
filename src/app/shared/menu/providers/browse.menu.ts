@@ -69,7 +69,7 @@ export class BrowseMenuProvider extends AbstractExpandableMenuProvider {
               model: {
                 type: MenuItemType.LINK,
                 text: `menu.section.browse_global_by_${browseDef.id}`,
-                link: `/browse/${browseDef.id}`,
+                link: browseDef.id === 'srsc' ? '/search' : `/browse/${browseDef.id}`,
               },
             };
           }),

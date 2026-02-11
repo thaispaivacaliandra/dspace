@@ -11,6 +11,7 @@ import { BrowseByDateComponent } from './app/browse-by/browse-by-date/browse-by-
 import { BrowseByMetadataComponent } from './app/browse-by/browse-by-metadata/browse-by-metadata.component';
 import { BrowseByTaxonomyComponent } from './app/browse-by/browse-by-taxonomy/browse-by-taxonomy.component';
 import { BrowseByTitleComponent } from './app/browse-by/browse-by-title/browse-by-title.component';
+import { BreadcrumbsComponent } from './app/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './app/footer/footer.component';
 import { HeaderComponent } from './app/header/header.component';
 import { HeaderNavbarWrapperComponent } from './app/header-nav-wrapper/header-navbar-wrapper.component';
@@ -34,6 +35,7 @@ const ENTRY_COMPONENTS = [
 
 const DECLARATIONS = [
   ...ENTRY_COMPONENTS,
+  BreadcrumbsComponent,
   BrowseByDateComponent,
   BrowseByMetadataComponent,
   BrowseByTaxonomyComponent,

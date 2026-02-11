@@ -8,6 +8,63 @@
             <h1 class="enap-section-title">{{'browse.metadata.' + browseId | translate}}</h1>
           </div>
 
+          <!-- Search + alphabetical dropdown toolbar -->
+          <div class="enap-filter-toolbar">
+            <form class="enap-search-box" (ngSubmit)="onSearchSubmit()">
+              <input type="text"
+                     class="enap-search-input"
+                     [(ngModel)]="searchText"
+                     name="searchText"
+                     placeholder="Buscar por nome..."
+                     [attr.aria-label]="'Buscar'">
+              @if (searchText) {
+                <button type="button" class="enap-search-clear" (click)="searchText = ''" aria-label="Limpar busca">
+                  <i class="fas fa-times"></i>
+                </button>
+              }
+              <button type="submit" class="enap-search-submit">
+                Buscar
+              </button>
+            </form>
+
+            <div class="enap-filter-actions">
+              <!-- Letter dropdown -->
+              @if (startsWithOptions?.length > 0) {
+                <div ngbDropdown class="enap-letter-dropdown">
+                  <button class="enap-letter-toggle" ngbDropdownToggle type="button">
+                    <i class="fas fa-font me-1"></i>
+                    @if (startsWith) {
+                      <span class="enap-active-letter">{{ startsWith }}</span>
+                    } @else {
+                      A-Z
+                    }
+                    <i class="fas fa-chevron-down ms-1 enap-chevron"></i>
+                  </button>
+                  <div ngbDropdownMenu class="enap-letter-menu">
+                    <div class="enap-letter-grid">
+                      @for (option of startsWithOptions; track option) {
+                        <a ngbDropdownItem
+                           class="enap-letter-item"
+                           [class.active]="startsWith === '' + option"
+                           [routerLink]="[]"
+                           [queryParams]="{ startsWith: option }"
+                           queryParamsHandling="merge">{{ option }}</a>
+                      }
+                    </div>
+                  </div>
+                </div>
+              }
+
+              <!-- Active filter chip -->
+              @if (startsWith) {
+                <button class="enap-filter-chip" (click)="onClearFilter()" type="button">
+                  <span>{{ startsWith }}</span>
+                  <i class="fas fa-times ms-1"></i>
+                </button>
+              }
+            </div>
+          </div>
+
           @if (browseEntries$ | async; as entriesRD) {
             @if (entriesRD.hasSucceeded && entriesRD.payload?.page?.length > 0) {
               <ds-pagination
@@ -19,30 +76,34 @@
                 [hidePaginationDetail]="true"
                 (prev)="goPrev()"
                 (next)="goNext()">
-                <div class="enap-entries-tree">
+                <div class="enap-entries-list">
                   @for (entry of entriesRD.payload.page; track entry.value) {
-                    <a [routerLink]="[]"
-                                [queryParams]="getEntryQueryParams(entry)"
-                                class="enap-node-name">
                     <div class="enap-entry-node">
-                      <div class="enap-node-card">
+                      <a class="enap-node-card"
+                         [routerLink]="[]"
+                         [queryParams]="getEntryQueryParams(entry)">
                         <div class="enap-node-content">
                           <span class="enap-node-icon" aria-hidden="true">
                             <i class="fas" [ngClass]="getEntryIcon()"></i>
                           </span>
                           <div class="enap-node-info">
-                              {{ entry.value }}
+                            <span class="enap-node-name">{{ entry.value }}</span>
                             <span class="enap-item-badge">
                               <i class="fas fa-file-alt me-1"></i>{{ entry.count }}
                             </span>
                           </div>
                         </div>
-                      </div>
+                      </a>
                     </div>
-                  </a>
                   }
                 </div>
               </ds-pagination>
+            }
+            @if (entriesRD.hasSucceeded && entriesRD.payload?.page?.length === 0) {
+              <div class="enap-empty-state">
+                <i class="fas fa-search"></i>
+                <p>{{'browse.empty' | translate}}</p>
+              </div>
             }
             @if (entriesRD.isLoading) {
               <ds-loading message="{{'loading.browse-by-page' | translate}}"></ds-loading>

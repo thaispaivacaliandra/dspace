@@ -1,4 +1,4 @@
-// ── ENAP Browse by Metadata – Community List Style ──
+// ── ENAP Browse by Metadata – Polished Design ──
 
 $enap-primary: var(--enap-primary, #024248);
 $enap-accent: var(--enap-accent, #007D7A);
@@ -8,7 +8,7 @@ $enap-shadow-hover: var(--enap-shadow-hover, 0 12px 32px rgba(0, 0, 0, 0.14));
 $enap-transition: var(--enap-transition, 0.3s ease);
 
 .enap-browse-page {
-  background: white;
+  background: #f8fafa;
   min-height: 60vh;
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -22,14 +22,236 @@ $enap-transition: var(--enap-transition, 0.3s ease);
 
 // ── Header ──
 .enap-browse-header {
-  margin-bottom: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
-// ── Entries tree (card list) ──
-.enap-entries-tree {
+
+
+.enap-section-subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 400;
+}
+
+// ══════════════════════════════════
+// ── Filter toolbar (search + dropdown)
+// ══════════════════════════════════
+.enap-filter-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+// ── Search box ──
+.enap-search-box {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+  background: #f3f6f6;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+
+  &:focus-within {
+    border-color: var(--enap-accent, #007D7A);
+    box-shadow: 0 0 0 3px rgba(0, 125, 122, 0.1);
+    background: white;
+  }
+}
+
+.enap-search-input {
+  flex: 1;
+  border: none;
+  background: white;
+  padding: 8px;
+  font-size: 0.9rem;
+  color: var(--enap-primary, #024248);
+  border: 1px solid #C8D1E0;
+  min-width: 0;
+  height: 44px;
+  overflow: hidden;
+  border-radius: 8px 0 0 8px;
+
+  &::placeholder {
+    color: #707A8B;
+    font-weight: 400;
+  }
+}
+
+.enap-search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #6b7280;
+  }
+}
+
+.enap-search-submit {
+  border: none;
+  background: var(--enap-accent, #007D7A);
+  color: white;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  height: 44px;
+
+  &:hover {
+    background: var(--enap-primary, #024248);
+  }
+}
+
+// ── Filter actions (dropdown + chip) ──
+.enap-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+// ── Letter dropdown ──
+.enap-letter-dropdown {
+  position: relative;
+}
+
+.enap-letter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  border-radius: 8px;
+  border: 1px solid #C8D1E0;
+  overflow: hidden;
+  height: 45px;
+  padding: 8px;
+  background: white;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--enap-primary, #024248);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:hover {
+    border-color: var(--enap-accent, #007D7A);
+    background: rgba(0, 125, 122, 0.03);
+  }
+
+  &::after {
+    display: none; // hide default ngb caret
+  }
+
+  .enap-chevron {
+    font-size: 0.65rem;
+    opacity: 0.6;
+    transition: transform 0.2s ease;
+  }
+
+  .enap-active-letter {
+    background: var(--enap-accent, #007D7A);
+    color: white;
+    border-radius: 5px;
+    padding: 0 0.35rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}
+
+.enap-letter-menu {
+  padding: 0.75rem !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12) !important;
+  min-width: 280px !important;
+}
+
+.enap-letter-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0.25rem;
+}
+
+.enap-letter-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.25rem !important;
+  border-radius: 6px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: var(--enap-primary, #024248) !important;
+  text-decoration: none !important;
+  text-align: center;
+  transition: all 0.15s ease;
+  min-width: 0 !important;
+
+  &:hover {
+    background: rgba(0, 125, 122, 0.08) !important;
+    color: var(--enap-accent, #007D7A) !important;
+  }
+
+  &.active {
+    background: var(--enap-accent, #007D7A) !important;
+    color: white !important;
+  }
+}
+
+// ── Active filter chip ──
+.enap-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  background: rgba(0, 125, 122, 0.1);
+  color: var(--enap-accent, #007D7A);
+  border: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+  }
+
+  i {
+    font-size: 0.65rem;
+  }
+}
+
+// ── Entries list ──
+.enap-entries-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
 // ── Entry node ──
@@ -37,18 +259,31 @@ $enap-transition: var(--enap-transition, 0.3s ease);
   display: block;
 }
 
-// ── Node card ──
+// ── Node card (clickable <a>) ──
 .enap-node-card {
+  display: block;
   background: #fff;
-  border-radius: $enap-card-radius;
-  padding: 1.25rem 1.5rem;
-  box-shadow: $enap-shadow;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   transition: transform $enap-transition, box-shadow $enap-transition;
-  border: 1px solid transparent;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-2px);
     box-shadow: $enap-shadow-hover;
+    border-color: rgba(0, 125, 122, 0.15);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $enap-accent;
+    outline-offset: 2px;
+    border-radius: 12px;
   }
 }
 
@@ -64,18 +299,19 @@ $enap-transition: var(--enap-transition, 0.3s ease);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
   border-radius: 10px;
-  background: rgba(0, 125, 122, 0.08);
+  background: linear-gradient(135deg, rgba(0, 125, 122, 0.1), rgba(0, 125, 122, 0.05));
   color: $enap-accent;
-  font-size: 1.1rem;
-  transition: background $enap-transition, color $enap-transition;
+  font-size: 0.95rem;
+  transition: background $enap-transition, transform 0.2s ease;
 }
 
 .enap-node-card:hover .enap-node-icon {
-  background: rgba(0, 125, 122, 0.14);
+  background: linear-gradient(135deg, rgba(0, 125, 122, 0.18), rgba(0, 125, 122, 0.1));
+  transform: scale(1.05);
 }
 
 // ── Node info ──
@@ -87,73 +323,167 @@ $enap-transition: var(--enap-transition, 0.3s ease);
   min-width: 0;
 }
 
-// ── Node name (link) ──
+// ── Node name ──
 .enap-node-name {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   color: $enap-primary;
-  text-decoration: none;
   transition: color $enap-transition;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-  &:hover {
-    color: $enap-accent;
-    text-decoration: none;
-  }
-
-  &:focus-visible {
-    outline: 3px solid $enap-accent;
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
+.enap-node-card:hover .enap-node-name {
+  color: $enap-accent;
 }
 
 // ── Item count badge ──
 .enap-item-badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.7rem;
-  background: rgba(0, 125, 122, 0.08);
+  padding: 0.2rem 0.6rem;
+  background: rgba(0, 125, 122, 0.07);
   color: $enap-accent;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
+// ── Empty state ──
+.enap-empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: white;
+  border-radius: $enap-card-radius;
+  box-shadow: $enap-shadow;
 
-// ── Section title (shared with community list) ──
+  i {
+    font-size: 2.5rem;
+    color: #d1d5db;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  p {
+    color: #9ca3af;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+// ── Section title & deep overrides ──
 :host ::ng-deep {
   .enap-section-title {
-    font-size: 1.75rem;
+    font-size: 40px;
     font-weight: 700;
     color: $enap-primary;
     margin-bottom: 0.5rem;
+  }
+
+  // ── Header for ds-browse-by view ──
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: $enap-primary;
+    margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
     border-bottom: 2px solid $enap-accent;
     text-align: center;
   }
 
-  // ── Full browse mode overrides ──
+  // ── List group (item cards) ──
   .list-group {
     border: none;
     border-radius: 0;
     box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
   }
 
   .list-group-item {
     border: none;
-    border-radius: 0;
-    padding: 0;
-    background: transparent;
+    border-radius: 12px !important;
+    padding: 1rem 1.25rem;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transition: transform $enap-transition, box-shadow $enap-transition;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $enap-shadow-hover;
+      border-color: rgba(0, 125, 122, 0.15) !important;
+    }
+  }
+
+  // ── Item content styling ──
+  .lead.item-list-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $enap-primary;
+    text-decoration: none;
+    transition: color $enap-transition;
+
+    &:hover {
+      color: $enap-accent;
+      text-decoration: none;
+    }
+  }
+
+  .item-list-authors,
+  .item-list-publisher,
+  .item-list-date {
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+
+  .item-list-abstract {
+    font-size: 0.88rem;
+    color: #4b5563;
+    margin-top: 0.4rem;
+  }
+
+  // ── Browse entry (value + count) styling ──
+  .d-flex.flex-row {
+    align-items: center;
+    gap: 0.75rem;
+
+    .lead {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $enap-primary;
+      text-decoration: none;
+      transition: color $enap-transition;
+
+      &:hover {
+        color: $enap-accent;
+        text-decoration: none;
+      }
+    }
+
+    .badge.rounded-pill {
+      background: rgba(0, 125, 122, 0.07) !important;
+      color: $enap-accent !important;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+    }
   }
 
   ds-starts-with-text,
   .starts-with {
-    background: var(--enap-bg-light, #f8fafa);
+    background: white;
     border-radius: $enap-card-radius;
     padding: 1rem 1.5rem;
     margin-bottom: 1.5rem;
+    box-shadow: $enap-shadow;
 
     .btn {
       border-radius: 8px;
@@ -176,6 +506,15 @@ $enap-transition: var(--enap-transition, 0.3s ease);
       color: var(--enap-accent, #007D7A);
       border-radius: 32px;
       margin: 0 2px;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      font-weight: 500;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
 
       &:hover {
         background-color: #EBEFF5;
@@ -188,13 +527,24 @@ $enap-transition: var(--enap-transition, 0.3s ease);
       border-color: #025257;
       color: white;
       border-radius: 32px;
+      box-shadow: 0 2px 8px rgba(2, 82, 87, 0.3);
+    }
+
+    .page-item.disabled .page-link {
+      background: transparent;
+      color: #d1d5db;
     }
   }
 
   .reset .btn {
-    color: $enap-primary;
+    background: $enap-primary;
     border-color: $enap-primary;
-    border-radius: 40px;
+    border-radius: 32px;
+    font-weight: 600;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 
     &:hover {
       background-color: $enap-primary;
@@ -223,39 +573,65 @@ $enap-transition: var(--enap-transition, 0.3s ease);
     padding: 0 0.75rem;
   }
 
+  .enap-browse-header {
+    padding-bottom: 0.75rem;
+  }
+
+  .enap-filter-toolbar {
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .enap-search-box {
+    width: 100%;
+  }
+
+  .enap-filter-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .enap-letter-menu {
+    min-width: 260px !important;
+  }
+
+  .enap-letter-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
   .enap-node-card {
-    padding: 1rem 1.25rem;
-    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
   }
 
   .enap-node-icon {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    font-size: 1rem;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    font-size: 0.9rem;
   }
 
   .enap-node-name {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .enap-item-badge {
-    font-size: 0.75rem;
-    padding: 0.2rem 0.5rem;
+    font-size: 0.72rem;
+    padding: 0.18rem 0.5rem;
   }
 
   :host ::ng-deep .enap-section-title {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
-
 }
 
 @media (max-width: 576px) {
   .enap-node-icon {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    font-size: 0.9rem;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    font-size: 0.85rem;
     border-radius: 8px;
   }
 
@@ -266,5 +642,13 @@ $enap-transition: var(--enap-transition, 0.3s ease);
   .enap-node-info {
     flex-wrap: wrap;
     gap: 0.4rem;
+  }
+
+  .enap-letter-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .enap-letter-menu {
+    min-width: 220px !important;
   }
 }

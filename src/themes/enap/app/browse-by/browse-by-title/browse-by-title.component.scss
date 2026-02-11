@@ -1,43 +1,45 @@
+// ── ENAP Browse by Title – Consistent Design ──
+
+$enap-primary: var(--enap-primary, #024248);
+$enap-accent: var(--enap-accent, #007D7A);
+$enap-card-radius: var(--enap-card-radius, 16px);
+$enap-shadow: var(--enap-shadow, 0 4px 24px rgba(0, 0, 0, 0.08));
+$enap-shadow-hover: var(--enap-shadow-hover, 0 12px 32px rgba(0, 0, 0, 0.14));
+$enap-transition: var(--enap-transition, 0.3s ease);
+
 .enap-browse-page {
-  background: white;
+  background: #f8fafa;
   min-height: 60vh;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .enap-browse-container {
   max-width: 1142px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 0 1rem;
 }
 
 :host ::ng-deep {
+  // ── Header title ──
   h1 {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--enap-primary, #024248);
+    color: $enap-primary;
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--enap-accent, #007D7A);
+    border-bottom: 2px solid $enap-accent;
+    text-align: center;
   }
 
-  .list-group {
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .list-group-item {
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    background: transparent;
-  }
-
+  // ── Starts-with text filter ──
   ds-starts-with-text,
   .starts-with {
-    background: var(--enap-bg-light, #f8fafa);
-    border-radius: var(--enap-card-radius, 16px);
+    background: white;
+    border-radius: 12px;
     padding: 1rem 1.5rem;
     margin-bottom: 1.5rem;
+    box-shadow: $enap-shadow;
 
     .btn {
       border-radius: 8px;
@@ -45,21 +47,147 @@
       font-size: 0.85rem;
       min-width: 36px;
       padding: 0.35rem 0.6rem;
+      transition: all 0.2s ease;
 
       &.active,
       &:hover {
-        background-color: var(--enap-accent, #007D7A);
-        border-color: var(--enap-accent, #007D7A);
+        background-color: $enap-accent;
+        border-color: $enap-accent;
         color: white;
       }
     }
   }
 
+  // ── List group (item list) ──
+  .list-group {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .list-group-item {
+    border: none;
+    border-radius: 12px !important;
+    padding: 1rem 1.25rem;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transition: transform $enap-transition, box-shadow $enap-transition;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $enap-shadow-hover;
+      border-color: rgba(0, 125, 122, 0.15) !important;
+    }
+  }
+
+  // ── Item content styling ──
+  ds-listable-object-component-loader {
+    display: block;
+
+    .row {
+      align-items: center;
+    }
+  }
+
+  .lead.item-list-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $enap-primary;
+    text-decoration: none;
+    transition: color $enap-transition;
+
+    &:hover {
+      color: $enap-accent;
+      text-decoration: none;
+    }
+  }
+
+  .item-list-authors,
+  .item-list-publisher,
+  .item-list-date {
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+
+  .item-list-abstract {
+    font-size: 0.88rem;
+    color: #4b5563;
+    margin-top: 0.4rem;
+  }
+
+  // ── Badges ──
+  .badge {
+    background-color: $enap-accent;
+    color: white;
+    border-radius: 12px;
+    padding: 0.25rem 0.6rem;
+    font-weight: 500;
+    font-size: 0.8rem;
+  }
+
+  // ── Browse entry (value + count) styling ──
+  .d-flex.flex-row {
+    align-items: center;
+    gap: 0.75rem;
+
+    .lead {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $enap-primary;
+      text-decoration: none;
+      transition: color $enap-transition;
+
+      &:hover {
+        color: $enap-accent;
+        text-decoration: none;
+      }
+    }
+
+    .badge.rounded-pill {
+      background: rgba(0, 125, 122, 0.07) !important;
+      color: $enap-accent !important;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+    }
+  }
+
+  // ── Reset button ──
+  .reset .btn {
+    background: $enap-primary;
+    border-color: $enap-primary;
+    border-radius: 32px;
+    font-weight: 600;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    &:hover {
+      background-color: $enap-primary;
+      color: white;
+    }
+  }
+
+  // ── Pagination ──
   .pagination {
     .page-link {
-      color: var(--enap-accent, #007D7A);
+      color: $enap-accent;
       border-radius: 32px;
       margin: 0 2px;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      font-weight: 500;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
 
       &:hover {
         background-color: #EBEFF5;
@@ -72,27 +200,22 @@
       border-color: #025257;
       color: white;
       border-radius: 32px;
+      box-shadow: 0 2px 8px rgba(2, 82, 87, 0.3);
+    }
+
+    .page-item.disabled .page-link {
+      background: transparent;
+      color: #d1d5db;
     }
   }
 
-  .reset .btn {
-    color: var(--enap-primary, #024248);
-    border-color: var(--enap-primary, #024248);
-    border-radius: var(--enap-btn-radius, 40px);
-
-    &:hover {
-      background-color: var(--enap-primary, #024248);
-      color: white;
-    }
-  }
-
-  // Hide item thumbnails on title browse page
+  // ── Hide item thumbnails on title browse page ──
   ds-thumbnail,
   ds-themed-thumbnail {
     display: none !important;
   }
 
-  // Ensure item content takes full width (no thumbnail column)
+  // ── Ensure item content takes full width ──
   ds-item-search-result-list-element .row > .col-9,
   ds-item-search-result-list-element .row > .col-md-12 {
     flex: 0 0 100% !important;
@@ -104,14 +227,25 @@
   }
 }
 
+// ── Responsive ──
 @media (max-width: 768px) {
+  .enap-browse-page {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
   .enap-browse-container {
-    padding: 1.5rem 0.75rem;
+    padding: 0 0.75rem;
   }
 
   :host ::ng-deep {
     h1 {
       font-size: 1.4rem;
+    }
+
+    .list-group-item {
+      padding: 0.85rem 1rem;
+      border-radius: 10px !important;
     }
   }
 }
