@@ -149,8 +149,10 @@
   // Clamp to 3 lines
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .recent-meta {
