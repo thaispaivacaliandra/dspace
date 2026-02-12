@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   NgClass,
+  NgTemplateOutlet,
 } from '@angular/common';
 import {
   Component,
@@ -25,6 +26,7 @@ import { TruncatablePartComponent } from '../../../../../../../../../app/shared/
   imports: [
     AsyncPipe,
     NgClass,
+    NgTemplateOutlet,
     RouterLink,
     TruncatableComponent,
     TruncatablePartComponent,
@@ -58,6 +60,9 @@ export class ItemSearchResultListElementComponent extends BaseComponent implemen
   itemAuthor: string;
   itemLanguage: string;
   itemDate: string;
+  itemPublisher: string;
+  itemAbstract: string;
+  itemSubjects: string[];
 
   override ngOnInit(): void {
     super.ngOnInit();
@@ -66,6 +71,9 @@ export class ItemSearchResultListElementComponent extends BaseComponent implemen
     this.itemAuthor = this.dso?.firstMetadataValue('dc.contributor.author') || '';
     this.itemLanguage = this.dso?.firstMetadataValue('dc.language.iso') || '';
     this.itemDate = this.dso?.firstMetadataValue('dc.date.issued') || '';
+    this.itemPublisher = this.dso?.firstMetadataValue('dc.publisher') || '';
+    this.itemAbstract = this.dso?.firstMetadataValue('dc.description.abstract') || '';
+    this.itemSubjects = this.allMetadataValues(['dc.subject']) || [];
   }
 
   getBadgeColor(type: string): string {

@@ -1,68 +1,65 @@
-@if (object !== undefined && object !== null && linkType !== linkTypes.None) {
-  <a [target]="(linkType === linkTypes.ExternalLink) ? '_blank' : '_self'"
-    [attr.rel]="(linkType === linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
-    [routerLink]="[itemPageRoute]"
-    class="enap-item-row-link">
-    <div class="enap-item-row">
+<ng-template #itemCard>
+  <div class="enap-item-row">
+    <div class="enap-item-header">
       @if (itemType) {
         <span class="enap-type-badge" [style.background]="badgeColor">
           {{ itemType }}
         </span>
       }
-
-      <span class="enap-item-title" [innerHTML]="dsoTitle"></span>
-
-      <div class="enap-item-meta">
-        @if (itemAuthor) {
-          <div class="enap-meta-line">
-            <span class="enap-meta-label">Autor:</span>
-            <span class="enap-meta-value">{{ itemAuthor }}</span>
-          </div>
-        }
-        @if (itemLanguage) {
-          <div class="enap-meta-line">
-            <span class="enap-meta-label">Linguagem:</span>
-            <span class="enap-meta-value">{{ itemLanguage }}</span>
-          </div>
-        }
-        @if (itemDate) {
-          <div class="enap-meta-line">
-            <span class="enap-meta-label">Publicação:</span>
-            <span class="enap-meta-value">{{ itemDate }}</span>
-          </div>
-        }
-      </div>
+      @if (itemDate) {
+        <span class="enap-item-date">
+          <i class="fas fa-calendar-alt"></i> {{ itemDate }}
+        </span>
+      }
     </div>
-  </a>
-} @else {
-  <div class="enap-item-row">
-    @if (itemType) {
-      <span class="enap-type-badge" [style.background]="badgeColor">
-        {{ itemType }}
-      </span>
-    }
 
     <span class="enap-item-title" [innerHTML]="dsoTitle"></span>
 
     <div class="enap-item-meta">
       @if (itemAuthor) {
         <div class="enap-meta-line">
+          <i class="fas fa-user enap-meta-icon"></i>
           <span class="enap-meta-label">Autor:</span>
           <span class="enap-meta-value">{{ itemAuthor }}</span>
         </div>
       }
+      @if (itemPublisher) {
+        <div class="enap-meta-line">
+          <i class="fas fa-building enap-meta-icon"></i>
+          <span class="enap-meta-label">Editora:</span>
+          <span class="enap-meta-value">{{ itemPublisher }}</span>
+        </div>
+      }
       @if (itemLanguage) {
         <div class="enap-meta-line">
+          <i class="fas fa-globe enap-meta-icon"></i>
           <span class="enap-meta-label">Linguagem:</span>
           <span class="enap-meta-value">{{ itemLanguage }}</span>
         </div>
       }
-      @if (itemDate) {
-        <div class="enap-meta-line">
-          <span class="enap-meta-label">Publicação:</span>
-          <span class="enap-meta-value">{{ itemDate }}</span>
-        </div>
-      }
     </div>
+
+    @if (itemAbstract) {
+      <p class="enap-item-abstract">{{ itemAbstract }}</p>
+    }
+
+    @if (itemSubjects.length > 0) {
+      <div class="enap-item-subjects">
+        @for (subject of itemSubjects; track subject) {
+          <span class="enap-subject-tag">{{ subject }}</span>
+        }
+      </div>
+    }
   </div>
+</ng-template>
+
+@if (object !== undefined && object !== null && linkType !== linkTypes.None) {
+  <a [target]="(linkType === linkTypes.ExternalLink) ? '_blank' : '_self'"
+    [attr.rel]="(linkType === linkTypes.ExternalLink) ? 'noopener noreferrer' : null"
+    [routerLink]="[itemPageRoute]"
+    class="enap-item-row-link">
+    <ng-container *ngTemplateOutlet="itemCard"></ng-container>
+  </a>
+} @else {
+  <ng-container *ngTemplateOutlet="itemCard"></ng-container>
 }

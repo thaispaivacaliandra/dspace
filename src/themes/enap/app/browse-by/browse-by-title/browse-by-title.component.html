@@ -2,13 +2,18 @@
   <section class="enap-browse-page">
     <div class="enap-browse-container">
       @if ((loading$ | async) !== true) {
+        <div class="enap-browse-header">
+          <h1 class="enap-section-title">{{'browse.metadata.' + browseId | translate}}</h1>
+          <p class="enap-section-description">Navegue pelo acervo utilizando os títulos, datas e nomes dos autores das publicações disponíveis no repositório.</p>
+          <hr class="enap-section-divider">
+        </div>
         <ds-browse-by class="col-12 w-100"
                        title="{{'browse.title' | translate:{
                          field: 'browse.metadata.' + browseId | translate,
                          startsWith: (startsWith)? ('browse.startsWith' | translate: { startsWith: '&quot;' + startsWith + '&quot;' }) : '',
                          value: (value)? '&quot;' + value + '&quot;': ''
                        } }}"
-          [displayTitle]="displayTitle"
+          [displayTitle]="false"
           [objects$]="(items$ !== undefined)? items$ : browseEntries$"
           [paginationConfig]="(currentPagination$ |async)"
           [sortConfig]="(currentSort$ |async)"

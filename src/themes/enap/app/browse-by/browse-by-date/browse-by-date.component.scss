@@ -23,7 +23,7 @@ $enap-transition: var(--enap-transition, 0.3s ease);
 :host ::ng-deep {
   // ── Header title ──
   h1 {
-    font-size: 1.75rem;
+    font-size: 40px;
     font-weight: 700;
     color: $enap-primary;
     margin-bottom: 1.5rem;
@@ -47,7 +47,8 @@ $enap-transition: var(--enap-transition, 0.3s ease);
       font-size: 0.9rem;
     }
 
-    .form-control {
+    .form-control,
+    .form-select {
       border-radius: 12px;
       border: 1px solid #C8D1E0;
       overflow: hidden;

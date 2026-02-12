@@ -266,15 +266,15 @@ $enap-transition: var(--enap-transition, 0.3s ease);
   border-radius: 12px;
   padding: 1rem 1.25rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-  transition: transform $enap-transition, box-shadow $enap-transition;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid #DEE3ED;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
 
   &:hover {
-    transform: translateY(-2px);
     box-shadow: $enap-shadow-hover;
+    color: #006969;
+    background-color: #EBEFF5;
     border-color: rgba(0, 125, 122, 0.15);
     text-decoration: none;
     color: inherit;
@@ -388,7 +388,7 @@ $enap-transition: var(--enap-transition, 0.3s ease);
 
   // ── Header for ds-browse-by view ──
   h1 {
-    font-size: 1.75rem;
+    font-size: 40px;
     font-weight: 700;
     color: $enap-primary;
     margin-bottom: 1.5rem;
@@ -485,6 +485,30 @@ $enap-transition: var(--enap-transition, 0.3s ease);
     margin-bottom: 1.5rem;
     box-shadow: $enap-shadow;
 
+    .input-group {
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .form-control {
+      height: 45px;
+      padding: 8px;
+      border-radius: 12px 0 0 12px;
+      border: 1px solid #C8D1E0;
+      font-size: 0.9rem;
+      color: var(--bs-body-color);
+      transition: border-color $enap-transition;
+
+      &:focus {
+        border-color: $enap-accent;
+        box-shadow: 0 0 0 3px rgba(0, 125, 122, 0.1);
+      }
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+    }
+
     .btn {
       border-radius: 8px;
       margin: 2px;
@@ -497,6 +521,22 @@ $enap-transition: var(--enap-transition, 0.3s ease);
         background-color: $enap-accent;
         border-color: $enap-accent;
         color: white;
+      }
+    }
+
+    .btn.btn-primary {
+      height: 45px;
+      padding: 8px 1.25rem;
+      border-radius: 0 12px 12px 0;
+      background-color: $enap-accent;
+      border-color: $enap-accent;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+
+      &:hover {
+        background-color: $enap-primary;
+        border-color: $enap-primary;
       }
     }
   }
