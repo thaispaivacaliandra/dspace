@@ -20,6 +20,7 @@ import { BrowseByTaxonomyComponent } from './app/browse-by/browse-by-taxonomy/br
 import { BrowseByTitleComponent } from './app/browse-by/browse-by-title/browse-by-title.component';
 import { CommunityListComponent } from './app/community-list-page/community-list/community-list.component';
 import { CommunityListPageComponent } from './app/community-list-page/community-list-page.component';
+import { SearchPageComponent } from './app/search-page/search-page.component';
 
 const DECLARATIONS = [
 ];
@@ -44,6 +45,7 @@ const DECLARATIONS = [
     BrowseByTitleComponent,
     CommunityListPageComponent,
     CommunityListComponent,
+    SearchPageComponent,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

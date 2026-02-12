@@ -70,9 +70,13 @@ export class ItemSearchResultListElementComponent extends BaseComponent implemen
     this.badgeColor = this.getBadgeColor(this.itemType);
     this.itemAuthor = this.dso?.firstMetadataValue('dc.contributor.author') || '';
     this.itemLanguage = this.dso?.firstMetadataValue('dc.language.iso') || '';
-    this.itemDate = this.dso?.firstMetadataValue('dc.date.issued') || '';
+    this.itemDate = this.dso?.firstMetadataValue('dc.date.issued')
+      || this.dso?.firstMetadataValue('dc.date.accessioned')?.substring(0, 10)
+      || '';
     this.itemPublisher = this.dso?.firstMetadataValue('dc.publisher') || '';
-    this.itemAbstract = this.dso?.firstMetadataValue('dc.description.abstract') || '';
+    this.itemAbstract = this.dso?.firstMetadataValue('dc.description.abstract')
+      || this.dso?.firstMetadataValue('dc.description')
+      || '';
     this.itemSubjects = this.allMetadataValues(['dc.subject']) || [];
   }
 

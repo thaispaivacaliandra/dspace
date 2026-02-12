@@ -30,12 +30,10 @@
   font-weight: 600;
   text-decoration: none;
   background: white;
-  transition: all var(--enap-transition, 0.3s ease);
 
   &:hover {
     background: var(--enap-accent, #007D7A);
     color: white;
-    transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0, 125, 122, 0.25);
   }
 

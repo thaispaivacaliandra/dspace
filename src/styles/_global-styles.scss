@@ -27,6 +27,7 @@ body {
     background: #f8fafa;
     flex: 1 1 100%;
     margin-top: 0;
+    overflow: hidden;
 }
 
 .alert.hide {
@@ -244,7 +245,7 @@ ds-dynamic-form-control-container.d-none {
 
 .btn.btn-link.btn-link-inline {
     display: inline;
-    padding: 0;
+    padding: 10px;
 
     &:not(:disabled){
         &:hover, &:focus {

@@ -48,7 +48,8 @@
         .ds-menu-item, .ds-menu-toggler-wrapper {
           color: var(--ds-navbar-link-color) !important;
           &:hover, &:focus {
-            color: var(--ds-navbar-link-color-hover) !important;
+            background: #EBEFF5;
+            color: #007D7A !important;
           }
         }
 

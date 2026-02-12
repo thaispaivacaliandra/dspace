@@ -196,19 +196,18 @@
   align-items: center;
   justify-content: center;
   height: 44px;
-  color: #024248;
-  border: 2px solid #024248;
+  color: #007D7A;
+  border: 1px solid #007D7A;
   padding: 8px 32px;
   border-radius: var(--enap-btn-radius, 40px);
   background-color: white;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s ease;
 
   &:hover {
     color: white;
-    background-color: #024248;
+    background-color: #007D7A;
   }
 }
 

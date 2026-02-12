@@ -9,13 +9,37 @@
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   transition: box-shadow var(--enap-transition, 0.3s ease);
+  cursor: pointer;
+  position: relative;
 
   &.p-3 {
-    padding: 0 !important;
+    padding: 1rem 1.25rem !important;
   }
 
   &:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  // Make the button cover the entire card header area
+  > button.filter-name {
+    position: static;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      border-radius: 12px;
+    }
+  }
+
+  // Keep inner interactive elements clickable above the overlay
+  .search-filter-wrapper {
+    position: relative;
+    z-index: 2;
   }
 
   // Filter category header button
@@ -160,6 +184,9 @@
 // ── Search page styling ──
 ds-search-page,
 ds-themed-search-page {
+  display: block;
+  padding-top: 2rem;
+
   .container {
     max-width: 1142px;
   }
@@ -167,20 +194,127 @@ ds-themed-search-page {
 
 ds-search,
 ds-themed-search {
+  // ── Results heading + CSV export row ──
+  .d-flex.justify-content-between {
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h1, .h1 {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+
   h1, .h1 {
-    font-size: 40px;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--enap-primary, #024248);
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--enap-accent, #007D7A);
   }
 
-  // Sidebar panel background
+  // ── Search form ──
+  #search-form {
+    margin-bottom: 1.5rem;
+
+    .input-group {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+
+      .form-control {
+        border: 1px solid #e5e7eb;
+        padding: 0.65rem 1rem;
+        font-size: 0.95rem;
+
+        &:focus {
+          border-color: var(--enap-accent, #007D7A);
+          box-shadow: 0 0 0 2px rgba(0, 125, 122, 0.15);
+        }
+      }
+
+      .search-button {
+        background-color: var(--enap-accent, #007D7A);
+        border-color: var(--enap-accent, #007D7A);
+        color: white;
+        font-weight: 600;
+        padding: 0.65rem 1.25rem;
+        transition: background-color var(--enap-transition, 0.3s ease);
+
+        &:hover {
+          background-color: var(--enap-primary, #024248);
+          border-color: var(--enap-primary, #024248);
+        }
+      }
+
+      .scope-button {
+        background-color: white;
+        border: 1px solid #e5e7eb;
+        color: var(--enap-primary, #024248);
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  // ── Applied filter labels / badges ──
+  .labels {
+    margin-bottom: 1rem;
+
+    .badge.bg-primary {
+      background-color: rgba(0, 125, 122, 0.1) !important;
+      color: var(--enap-primary, #024248);
+      border: 1px solid rgba(0, 125, 122, 0.25);
+      border-radius: 20px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: rgba(0, 125, 122, 0.2) !important;
+      }
+
+      span.ps-1 {
+        font-weight: 700;
+        font-size: 1rem;
+        line-height: 1;
+      }
+    }
+  }
+
+  // ── View mode switch ──
+  .btn-group[data-bs-toggle="buttons"] {
+    border-radius: 8px;
+    overflow: hidden;
+
+    .btn.btn-secondary {
+      background-color: white;
+      border: 1px solid #e5e7eb;
+      color: var(--enap-primary, #024248);
+      padding: 0.45rem 0.75rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: var(--enap-bg-light, #f8fafa);
+        color: var(--enap-accent, #007D7A);
+      }
+
+      &.active {
+        background-color: var(--enap-accent, #007D7A);
+        border-color: var(--enap-accent, #007D7A);
+        color: white;
+      }
+    }
+  }
+
+  // ── Sidebar panel background ──
   .sidebar-content {
     background-color: #F5F7FA;
     border-radius: var(--enap-card-radius, 16px);
-    padding: 1.25rem 1rem;
+    padding: 1.5rem 1.25rem;
   }
 
   .sidebar-search-result-filters,
@@ -191,17 +325,91 @@ ds-themed-search {
     }
   }
 
+  // ── Search settings heading ──
+  ds-search-settings {
+    h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--enap-primary, #024248);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  // ── Search switch configuration dropdown ──
+  // Give it the same card look as .setting-option
+  .search-switch-configuration {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem 1.25rem !important;
+    margin-bottom: 1rem;
+    transition: box-shadow var(--enap-transition, 0.3s ease);
+
+    &:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  // ── Unified label style for sidebar dropdowns ──
+  .search-switch-configuration h3,
+  .setting-option h4,
+  .setting-option .form-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--enap-primary, #024248);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+  }
+
+  // ── Unified select style for sidebar dropdowns ──
+  .search-switch-configuration .form-select,
+  .setting-option .form-select,
+  .setting-option select {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--enap-primary, #024248);
+    background-color: #ffffff;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: var(--enap-accent, #007D7A);
+      box-shadow: 0 0 0 2px rgba(0, 125, 122, 0.15);
+    }
+  }
+
+  // ── CSV export button ──
+  ds-search-export-csv {
+    .btn {
+      border-radius: var(--enap-btn-radius, 40px);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+    }
+  }
+
+  // ── Pagination ──
   .pagination {
+    justify-content: center;
+    margin-top: 2rem;
+
     .page-link {
       color: var(--enap-accent, #007D7A);
       border-radius: 32px;
       margin: 0 2px;
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: transparent;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
 
       &:hover {
         background-color: #EBEFF5;
@@ -210,11 +418,21 @@ ds-themed-search {
     }
 
     .page-item.active .page-link {
-      background-color: #025257;
-      border-color: #025257;
+      background-color: var(--enap-primary, #025257);
+      border-color: var(--enap-primary, #025257);
       color: white;
       border-radius: 32px;
     }
+
+    .page-item.disabled .page-link {
+      color: #c0c5cc;
+    }
+  }
+
+  // ── No results message ──
+  .col-12 > div:last-child a[routerLink] {
+    color: var(--enap-accent, #007D7A);
+    font-weight: 600;
   }
 }
 
@@ -262,20 +480,24 @@ ds-themed-search-filters {
     text-transform: uppercase;
     letter-spacing: 0.04em;
     padding-bottom: 0.65rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     border-bottom: 2px solid var(--enap-accent, #007D7A);
+    text-align: center;
   }
 
   // Reset filters button
   > .btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
     background-color: var(--enap-accent, #007D7A);
     border-color: var(--enap-accent, #007D7A);
     border-radius: var(--enap-btn-radius, 40px);
-    padding: 0.5rem 1.5rem;
+    padding: 0.55rem 1.5rem;
     font-weight: 600;
     font-size: 0.875rem;
     transition: all var(--enap-transition, 0.3s ease);
-    margin-top: 0.5rem;
+    margin-top: 1rem;
 
     &:hover {
       background-color: var(--enap-primary, #024248);

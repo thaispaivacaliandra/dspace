@@ -13,11 +13,11 @@
   padding: 2rem 1.5rem;
   text-decoration: none;
   color: inherit;
-  transition: transform var(--enap-transition, 0.3s ease), box-shadow var(--enap-transition, 0.3s ease);
 
   &:hover {
-    transform: translateY(-6px);
     box-shadow: var(--enap-shadow-hover, 0 12px 32px rgba(0, 0, 0, 0.14));
+    color: #006969;
+    background-color: #EBEFF5;
 
     .category-icon i {
       transform: scale(1.1);
@@ -89,20 +89,18 @@
   align-items: center;
   justify-content: center;
   height: 44px;
-  text-decoration: none;
-  color: var(--enap-accent, #007D7A);
-  border: 2px solid var(--enap-accent, #007D7A);
+  color: #007D7A;
+  border: 1px solid #007D7A;
   padding: 8px 32px;
   border-radius: var(--enap-btn-radius, 40px);
   background-color: white;
   font-weight: 600;
   font-size: 0.95rem;
-  transition: all var(--enap-transition, 0.3s ease);
+  cursor: pointer;
 
   &:hover {
     color: white;
-    background-color: var(--enap-accent, #007D7A);
-    border-color: var(--enap-accent, #007D7A);
+    background-color: #007D7A;
   }
 
   &:active {

@@ -120,7 +120,8 @@
         text-decoration: none;
 
         &:hover, &:focus {
-          color: var(--ds-admin-sidebar-link-hover-color);
+          background: #EBEFF5;
+          color: #007D7A !important;
         }
       }
     }
